@@ -608,7 +608,6 @@ function goTo(n){
   dotsEl.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i===current));
   updateNav(slides.length);
 }
-function moveSlide(dir){goTo(current+dir);}
 function updateNav(total){}
 function moveSlide(dir){
   const slides=track.querySelectorAll('.slide');
