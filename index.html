@@ -38,9 +38,11 @@ a{color:inherit;text-decoration:none;}
 
 /* ── LANG VISIBILITY ── */
 .en{display:block;}.id{display:none;}
-body.id .en{display:none;}body.id .id{display:block;}
 span.en{display:inline;}span.id{display:none;}
-body.id span.en{display:none;}body.id span.id{display:inline;}
+body.id .en{display:none !important;}
+body.id .id{display:block !important;}
+body.id span.en{display:none !important;}
+body.id span.id{display:inline !important;}
 
 /* ── BUTTONS ── */
 .btn{
