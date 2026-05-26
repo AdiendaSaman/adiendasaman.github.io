@@ -37,8 +37,8 @@ a{color:inherit;text-decoration:none;}
 .lbtn.on{background:var(--accent);color:var(--white);}
 
 /* ── LANG VISIBILITY ── */
-.en{display:block;}.id{display:none;}
-span.en{display:inline;}span.id{display:none;}
+.en{display:block !important;}.id{display:none !important;}
+span.en{display:inline !important;}span.id{display:none !important;}
 body.id .en{display:none !important;}
 body.id .id{display:block !important;}
 body.id span.en{display:none !important;}
@@ -230,8 +230,7 @@ footer{
   .roles-wrap{grid-template-columns:1fr;}
   .svc-grid{grid-template-columns:1fr;}
 }
-.fi{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease;}
-.fi.vis{opacity:1;transform:none;}
+.fi{opacity:1;transform:none;}
 </style>
 </head>
 <body class="en">
@@ -616,10 +615,7 @@ function moveSlide(dir){
   const total=slides.length;
   goTo((current+dir+total)%total);
 }
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});
-},{threshold:0.12});
-document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
+// fade-in disabled for language compatibility
 window.addEventListener('DOMContentLoaded',initSlides);
 </script>
 </body>
