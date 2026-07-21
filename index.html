@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Adienda Saman — Finance · Operations · Travel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --cream:#F8F4EF;--beige:#EDE7DC;--sand:#D4C9B8;--stone:#A89880;
+  --dark:#26211B;--mid:#6B5E50;--accent:#8B6744;--accent2:#C4A07A;
+  --white:#FDFBF8;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'DM Sans',sans-serif;
+  --r:10px;--shadow:0 2px 20px rgba(38,33,27,.07);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--cream);color:var(--dark);font-size:16px;line-height:1.75;font-weight:300;}
+img{max-width:100%;display:block;}a{color:inherit;text-decoration:none;}
+
+#navbar{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(248,244,239,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--sand);padding:0 48px;height:56px;display:flex;align-items:center;justify-content:space-between;}
+.nav-brand{font-family:var(--serif);font-size:18px;font-weight:700;color:var(--accent);}
+.nav-links{display:flex;align-items:center;gap:22px;}
+.nav-link{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);transition:color .2s;}
+.nav-link:hover{color:var(--accent);}
+.nav-cta{padding:7px 16px;background:var(--accent);color:var(--white)!important;border-radius:6px;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;transition:background .2s;}
+.nav-cta:hover{background:var(--dark)!important;}
+#lt{display:flex;border:1.5px solid var(--sand);border-radius:20px;overflow:hidden;}
+.lbtn{padding:5px 14px;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;border:none;background:transparent;color:var(--stone);cursor:pointer;transition:all .2s;}
+.lbtn.on{background:var(--accent);color:var(--white);}
+.en{display:block!important;}.id{display:none!important;}
+span.en{display:inline!important;}span.id{display:none!important;}
+[data-lang="id"] .en{display:none!important;}[data-lang="id"] .id{display:block!important;}
+[data-lang="id"] span.en{display:none!important;}[data-lang="id"] span.id{display:inline!important;}
+
+/* HERO */
+#hero{min-height:100vh;display:grid;grid-template-columns:3fr 2fr;padding-top:56px;background:var(--white);}
+.hero-l{padding:80px 56px 64px 80px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--beige);}
+.hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:18px;}
+.hero-name{font-family:var(--serif);font-size:clamp(52px,5.5vw,76px);font-weight:700;line-height:1;color:var(--dark);margin-bottom:20px;}
+.hero-sub{font-family:var(--serif);font-size:clamp(17px,1.6vw,21px);font-style:italic;color:var(--mid);line-height:1.6;margin-bottom:12px;max-width:480px;}
+.hero-p{font-size:14.5px;color:var(--stone);max-width:480px;margin-bottom:36px;line-height:1.8;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;border-radius:6px;transition:all .2s;cursor:pointer;border:none;}
+.btn-fill{background:var(--accent);color:var(--white);}
+.btn-fill:hover{background:var(--dark);transform:translateY(-1px);}
+.btn-out{background:transparent;color:var(--accent);border:1.5px solid var(--accent);}
+.btn-out:hover{background:var(--accent);color:var(--white);}
+.hero-r{overflow:hidden;background:var(--cream);}
+.hero-photo-area{width:100%;height:100%;min-height:100%;}
+.hero-photo-area img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;}
+.hero-photo-placeholder{width:100%;height:100%;min-height:400px;display:flex;align-items:center;justify-content:center;background:var(--beige);font-family:var(--serif);font-size:72px;color:var(--stone);}
+/* KPIs now live inside hero-l below the text */
+.hero-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--beige);border-radius:8px;overflow:hidden;margin-top:32px;}
+.kpi{padding:14px 16px;border-right:1px solid var(--beige);text-align:center;}
+.kpi:last-child{border-right:none;}
+.kpi-n{font-family:var(--serif);font-size:28px;font-weight:700;color:var(--accent);line-height:1;margin-bottom:3px;}
+.kpi-l{font-size:11px;color:var(--mid);line-height:1.4;}
+
+/* ROOMS */
+#rooms{background:var(--dark);padding:80px;}
+#rooms .label{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:10px;}
+#rooms .h2{font-family:var(--serif);font-size:clamp(28px,2.8vw,42px);font-weight:700;color:var(--white);margin-bottom:14px;white-space:nowrap;}
+#rooms .h2-sub{font-size:15px;color:var(--stone);margin-bottom:48px;max-width:560px;line-height:1.7;}
+.rooms-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.room-card{overflow:hidden;padding:40px 32px 36px;display:flex;flex-direction:column;justify-content:space-between;min-height:340px;cursor:pointer;transition:transform .3s;}
+.room-card:hover{transform:translateY(-4px);}
+.room-finance{background:#1A2332;}.room-ops{background:#1A2B1E;}.room-travel{background:#2B1E14;}
+.room-inner{display:flex;flex-direction:column;height:100%;gap:16px;}
+.room-icon{font-size:26px;margin-bottom:2px;}
+.room-num{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-bottom:4px;}
+.room-finance .room-num{color:#7BA7D4;}.room-ops .room-num{color:#7FC49B;}.room-travel .room-num{color:#E8A87C;}
+.room-title{font-family:var(--serif);font-size:26px;font-weight:700;color:var(--white);line-height:1.1;margin-bottom:8px;}
+.room-desc{font-size:13px;color:#A0A8B0;line-height:1.75;flex:1;}
+.room-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:14px;}
+.room-tag{font-size:10px;padding:3px 10px;border-radius:20px;font-weight:500;}
+.room-finance .room-tag{background:#243550;color:#7BA7D4;}
+.room-ops .room-tag{background:#243D28;color:#7FC49B;}
+.room-travel .room-tag{background:#3D281E;color:#E8A87C;}
+.room-cta{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:9px 18px;border:1.5px solid;border-radius:4px;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;transition:all .2s;width:fit-content;}
+.room-finance .room-cta{border-color:#7BA7D4;color:#7BA7D4;}.room-finance .room-cta:hover{background:#7BA7D4;color:#1A2332;}
+.room-ops .room-cta{border-color:#7FC49B;color:#7FC49B;}.room-ops .room-cta:hover{background:#7FC49B;color:#1A2B1E;}
+.room-travel .room-cta{border-color:#E8A87C;color:#E8A87C;}.room-travel .room-cta:hover{background:#E8A87C;color:#2B1E14;}
+
+/* ABOUT */
+#about{background:var(--white);padding:80px;}
+.sec-label{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;}
+.sec-h2{font-family:var(--serif);font-size:clamp(28px,2.8vw,44px);font-weight:700;color:var(--dark);line-height:1.15;margin-bottom:36px;}
+.rule{width:40px;height:2px;background:var(--accent2);margin-bottom:40px;}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;}
+.about-text p{font-size:15px;color:var(--mid);line-height:1.85;margin-bottom:16px;}
+.about-text p:last-child{margin-bottom:0;}
+.about-cards{display:flex;flex-direction:column;gap:12px;}
+.about-card{padding:16px 18px;background:var(--cream);border-left:3px solid var(--accent2);border-radius:0 6px 6px 0;}
+.about-card-title{font-family:var(--serif);font-size:15px;font-weight:700;color:var(--dark);margin-bottom:3px;}
+.about-card-desc{font-size:12.5px;color:var(--mid);line-height:1.6;}
+
+/* HORIZONTAL ICON TIMELINE */
+#timeline{background:var(--cream);padding:80px;}
+.tl-viewport{overflow:hidden;position:relative;}
+.tl-track{display:flex;transition:transform .4s ease;}
+.tl-slide{flex:0 0 100%;min-width:100%;}
+/* horizontal row of items */
+.tl-row{display:flex;align-items:flex-start;gap:0;position:relative;}
+.tl-row::before{content:'';position:absolute;top:36px;left:36px;right:36px;height:1px;background:var(--sand);z-index:0;}
+.tl-item{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 12px;position:relative;z-index:1;}
+.tl-circle{width:72px;height:72px;border-radius:50%;background:var(--white);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;margin-bottom:12px;box-shadow:0 2px 12px rgba(139,103,68,.12);}
+.tl-num{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--accent);margin-bottom:6px;}
+.tl-role{font-family:var(--serif);font-size:14px;font-weight:700;color:var(--dark);margin-bottom:3px;line-height:1.2;}
+.tl-org{font-size:11.5px;color:var(--accent);font-weight:500;margin-bottom:8px;}
+.tl-date{font-size:10.5px;color:var(--stone);margin-bottom:8px;letter-spacing:.04em;}
+.tl-desc{font-size:12px;color:var(--mid);line-height:1.65;max-width:180px;}
+.tl-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:36px;}
+.tl-btn{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--sand);background:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--mid);transition:all .2s;box-shadow:var(--shadow);}
+.tl-btn:hover{border-color:var(--accent);color:var(--accent);}
+.tl-dots{display:flex;gap:8px;}
+.tl-dot{width:7px;height:7px;border-radius:50%;background:var(--sand);cursor:pointer;transition:background .2s;}
+.tl-dot.on{background:var(--accent);}
+
+/* TOOLS AND SKILLS — soft warm tones */
+#tools-skills{background:var(--white);padding:80px;}
+.ts-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;}
+.ts-group-title{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--dark);margin-bottom:24px;padding-bottom:10px;border-bottom:2px solid var(--beige);}
+.ts-cats{display:flex;flex-direction:column;gap:14px;}
+.ts-cat{padding:18px 20px;border-radius:8px;}
+.ts-cat-label{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;opacity:.8;}
+.ts-chips{display:flex;flex-wrap:wrap;gap:7px;}
+.ts-chip{padding:7px 15px;border-radius:20px;font-size:13px;}
+/* soft warm tones matching cream palette */
+/* soft warm tones — light, readable, cream-palette aligned */
+.cat-accounting{background:#F2E8DC;border:1px solid #D4C9B8;}.cat-accounting .ts-cat-label{color:#8B6744;}.cat-accounting .ts-chip{background:#E8D5BC;color:#6B5040;border:1px solid #C4A07A;}
+.cat-productivity{background:#E8F0E8;border:1px solid #C0D4C0;}.cat-productivity .ts-cat-label{color:#3D7A55;}.cat-productivity .ts-chip{background:#D4E8D4;color:#2A5C40;border:1px solid #8FBFA0;}
+.cat-excel{background:#E4ECF5;border:1px solid #B8CCE4;}.cat-excel .ts-cat-label{color:#3B5FA0;}.cat-excel .ts-chip{background:#D0E0F0;color:#2B4370;border:1px solid #A8BFE0;}
+.cat-finance-skill{background:#F2E8DC;border:1px solid #D4C9B8;}.cat-finance-skill .ts-cat-label{color:#8B6744;}.cat-finance-skill .ts-chip{background:#E8D5BC;color:#6B5040;border:1px solid #C4A07A;}
+.cat-ops-skill{background:#E8F0E8;border:1px solid #C0D4C0;}.cat-ops-skill .ts-cat-label{color:#3D7A55;}.cat-ops-skill .ts-chip{background:#D4E8D4;color:#2A5C40;border:1px solid #8FBFA0;}
+.cat-sector{background:#E4ECF5;border:1px solid #B8CCE4;}.cat-sector .ts-cat-label{color:#3B5FA0;}.cat-sector .ts-chip{background:#D0E0F0;color:#2B4370;border:1px solid #A8BFE0;}
+
+/* CERTIFICATES */
+#certs{background:var(--cream);padding:80px;}
+.cert-carousel-wrap{overflow:hidden;position:relative;}
+.cert-track{display:flex;gap:20px;transition:transform .35s ease;}
+.cert-slide{flex:0 0 calc(33.333% - 14px);min-width:calc(33.333% - 14px);background:var(--white);border:1px solid var(--beige);border-radius:10px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:transform .2s,box-shadow .2s;}
+.cert-slide:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(38,33,27,.1);}
+.cert-img-wrap{width:100%;height:160px;background:var(--beige);overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.cert-img-wrap img{width:100%;height:100%;object-fit:cover;}
+.cert-img-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:100%;height:100%;}
+.cert-img-placeholder span{font-size:32px;}
+.cert-img-placeholder p{font-size:11px;color:var(--stone);letter-spacing:.08em;text-transform:uppercase;}
+.cert-info{padding:16px 18px;}
+.cert-title{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--dark);margin-bottom:4px;line-height:1.3;}
+.cert-issuer{font-size:11px;font-weight:500;color:var(--accent);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;}
+.cert-desc{font-size:12px;color:var(--mid);line-height:1.6;}
+.cert-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:24px;}
+.cert-btn{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--sand);background:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--mid);transition:all .2s;}
+.cert-btn:hover{border-color:var(--accent);color:var(--accent);}
+.cert-dots{display:flex;gap:8px;}
+.cert-dot{width:7px;height:7px;border-radius:50%;background:var(--sand);cursor:pointer;transition:background .2s;}
+.cert-dot.on{background:var(--accent);}
+
+/* OPEN TO */
+#opento{background:var(--dark);padding:80px;}
+#opento .sec-label{color:var(--accent2);}
+#opento .sec-h2{color:var(--white);margin-bottom:12px;}
+.opento-note{font-size:13.5px;color:var(--stone);font-style:italic;margin-bottom:36px;}
+.roles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.role{padding:20px 22px;border:1px solid #3A342C;border-radius:6px;transition:border-color .2s;}
+.role:hover{border-color:var(--accent2);}
+.role.core{border-color:var(--accent);}
+.role-title{font-family:var(--serif);font-size:18px;font-weight:700;color:var(--white);margin-bottom:4px;}
+.role.core .role-title{color:var(--accent2);}
+.role-type{font-size:12px;color:var(--stone);text-transform:uppercase;letter-spacing:.06em;}
+
+/* CONTACT BAR */
+#contact-bar{background:var(--dark);padding:0 80px 80px;}
+.cbar-inner{border-top:1px solid #3A342C;padding-top:56px;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;}
+.cbar-label{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:8px;}
+.cbar-h2{font-family:var(--serif);font-size:clamp(22px,2.2vw,34px);font-weight:700;color:var(--white);line-height:1.2;margin-bottom:10px;}
+.cbar-p{font-size:14px;color:var(--stone);max-width:500px;line-height:1.75;}
+.cbar-r{display:flex;flex-direction:column;gap:12px;align-items:flex-end;}
+.cbar-btns{display:flex;gap:10px;}
+.cbar-links{display:flex;gap:20px;justify-content:flex-end;}
+.cbar-link{font-size:12.5px;color:var(--stone);transition:color .2s;}
+.cbar-link:hover{color:var(--accent2);}
+
+/* LIGHTBOX */
+#lightbox{position:fixed;inset:0;z-index:999;background:rgba(38,33,27,.92);display:none;align-items:center;justify-content:center;padding:32px;}
+#lightbox.open{display:flex;}
+#lb-img{max-width:90vw;max-height:85vh;border-radius:8px;object-fit:contain;}
+#lb-close{position:absolute;top:20px;right:24px;font-size:28px;color:var(--white);cursor:pointer;opacity:.7;background:none;border:none;}
+#lb-close:hover{opacity:1;}
+#lb-cap{position:absolute;bottom:20px;left:0;right:0;text-align:center;color:rgba(255,255,255,.6);font-size:13px;}
+
+footer{background:var(--cream);border-top:1px solid var(--beige);padding:22px 80px;display:flex;justify-content:space-between;align-items:center;}
+.ft-name{font-family:var(--serif);font-size:14px;font-weight:700;color:var(--stone);}
+.ft-note{font-size:12px;color:var(--sand);}
+.ft-links{display:flex;gap:18px;}
+.ft-link{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--stone);transition:color .2s;}
+.ft-link:hover{color:var(--accent);}
+
+@media(max-width:960px){
+  #hero{grid-template-columns:1fr;min-height:auto;}
+  .hero-l{padding:64px 32px 32px;}
+  .hero-r{flex-direction:column;}
+  .hero-photo-area{min-height:240px;}
+  .rooms-grid{grid-template-columns:1fr;}
+  .about-grid{grid-template-columns:1fr;gap:32px;}
+  .ts-grid{grid-template-columns:1fr;gap:32px;}
+  .cert-slide{flex:0 0 calc(50% - 10px);min-width:calc(50% - 10px);}
+  .roles-grid{grid-template-columns:1fr 1fr;}
+  .cbar-inner{grid-template-columns:1fr;gap:28px;}
+  .cbar-r{align-items:flex-start;}
+  .cbar-links{justify-content:flex-start;}
+  #rooms,#about,#timeline,#tools-skills,#certs,#opento,#contact-bar{padding-left:32px;padding-right:32px;}
+  footer{padding:18px 32px;flex-direction:column;gap:8px;text-align:center;}
+  #navbar{padding:0 20px;}
+  .tl-row{flex-direction:column;align-items:center;}.tl-row::before{display:none;}.tl-item{max-width:320px;}
+}
+@media(max-width:560px){
+  .cert-slide{flex:0 0 100%;min-width:100%;}
+  .roles-grid{grid-template-columns:1fr;}
+  .tl-row-inner{grid-template-columns:1fr;}
+  #rooms,#about,#timeline,#tools-skills,#certs,#opento,#contact-bar{padding-left:20px;padding-right:20px;}
+  footer{padding:16px 20px;}
+}
+</style>
+</head>
+<body data-lang="en">
+
+<nav id="navbar">
+  <a href="#hero" class="nav-brand">Adienda Saman</a>
+  <div class="nav-links">
+    <a href="#rooms" class="nav-link"><span class="en">Portfolios</span><span class="id">Portofolio</span></a>
+    <a href="#about" class="nav-link"><span class="en">About</span><span class="id">Tentang</span></a>
+    <a href="#timeline" class="nav-link"><span class="en">Experience</span><span class="id">Pengalaman</span></a>
+    <a href="#tools-skills" class="nav-link"><span class="en">Skills</span><span class="id">Keahlian</span></a>
+    <a href="#certs" class="nav-link"><span class="en">Certificates</span><span class="id">Sertifikat</span></a>
+    <a href="#contact-bar" class="nav-link nav-cta"><span class="en">Get In Touch</span><span class="id">Hubungi</span></a>
+    <div id="lt">
+      <button class="lbtn on" id="btn-en" onclick="setLang('en')">EN</button>
+      <button class="lbtn" id="btn-id" onclick="setLang('id')">ID</button>
+    </div>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-l">
+    <p class="hero-eyebrow"><span class="en">Finance · Operations · Travel Logistics</span><span class="id">Keuangan · Operasional · Logistik Perjalanan</span></p>
+    <h1 class="hero-name">Adienda Saman</h1>
+    <p class="hero-sub"><span class="en">I get things done and document them properly.</span><span class="id">Saya menyelesaikan pekerjaan dan mendokumentasikannya dengan benar.</span></p>
+    <p class="hero-p"><span class="en">Finance professional with 3+ years in NGO financial management and 5+ years in remote international coordination, working across conservation programs, cross-border commerce, and community development.</span><span class="id">Profesional keuangan dengan 3+ tahun di manajemen keuangan NGO dan 5+ tahun koordinasi internasional jarak jauh, bekerja di program konservasi, perdagangan lintas batas, dan pengembangan komunitas.</span></p>
+    <div class="hero-btns">
+      <a href="#rooms" class="btn btn-fill"><span class="en">See My Work</span><span class="id">Lihat Pekerjaan Saya</span></a>
+      <a href="#contact-bar" class="btn btn-out"><span class="en">Get In Touch</span><span class="id">Hubungi Saya</span></a>
+    </div>
+    <div class="hero-kpis">
+      <div class="kpi"><p class="kpi-n">3+</p><p class="kpi-l"><span class="en">Years in NGO finance</span><span class="id">Tahun di keuangan NGO</span></p></div>
+      <div class="kpi"><p class="kpi-n">20+</p><p class="kpi-l"><span class="en">Field locations across Java</span><span class="id">Lokasi lapangan di Jawa</span></p></div>
+      <div class="kpi"><p class="kpi-n">5+</p><p class="kpi-l"><span class="en">Years remote coordination</span><span class="id">Tahun koordinasi jarak jauh</span></p></div>
+      <div class="kpi"><p class="kpi-n">5</p><p class="kpi-l"><span class="en">Countries travelled</span><span class="id">Negara dikunjungi</span></p></div>
+    </div>
+  </div>
+  <div class="hero-r">
+    <div class="hero-photo-area">
+      <img src="photo.jpg" alt="Adienda Saman" onerror="this.style.display='none';document.getElementById('ph-init').style.display='flex'"/>
+      <div class="hero-photo-placeholder" id="ph-init" style="display:none;">A</div>
+    </div>
+  </div>
+</section>
+
+<section id="rooms">
+  <p class="label"><span class="en">Portfolios</span><span class="id">Portofolio</span></p>
+  <h2 class="h2"><span class="en">Three areas. One professional.</span><span class="id">Tiga bidang. Satu profesional.</span></h2>
+  <p class="h2-sub"><span class="en">Pick the portfolio most relevant to what you are looking for.</span><span class="id">Pilih portofolio yang paling relevan dengan yang Anda cari.</span></p>
+  <div class="rooms-grid">
+    <div class="room-card room-finance" onclick="location.href='finance/'">
+      <div class="room-inner">
+        <div><div class="room-icon">📊</div><p class="room-num"><span class="en">Portfolio 01</span><span class="id">Portofolio 01</span></p>
+          <h3 class="room-title"><span class="en">Finance and Grant Management</span><span class="id">Keuangan dan Manajemen Hibah</span></h3>
+          <p class="room-desc"><span class="en">Donor compliance, grant disbursement, budget forecasting, financial reporting, and bookkeeping system design across 6 donor-funded conservation programs in Java.</span><span class="id">Kepatuhan donor, pencairan hibah, perencanaan anggaran, pelaporan keuangan, dan desain sistem pembukuan di 6 program konservasi berdonor di Jawa.</span></p>
+        </div>
+        <div><div class="room-tags"><span class="room-tag">Donor Compliance</span><span class="room-tag">Grant Reporting</span><span class="room-tag">COA Design</span><span class="room-tag">Budget Forecasting</span></div>
+          <a href="finance/" class="room-cta"><span class="en">View Finance Portfolio</span><span class="id">Lihat Portofolio Keuangan</span></a></div>
+      </div>
+    </div>
+    <div class="room-card room-ops" onclick="location.href='ops/'">
+      <div class="room-inner">
+        <div><div class="room-icon">⚙️</div><p class="room-num"><span class="en">Portfolio 02</span><span class="id">Portofolio 02</span></p>
+          <h3 class="room-title"><span class="en">Operations and Coordination</span><span class="id">Operasional dan Koordinasi</span></h3>
+          <p class="room-desc"><span class="en">Activity planning, procurement review, internal systems development, and 5 years of remote cross-border coordination across NGO programs and international commerce.</span><span class="id">Perencanaan aktivitas, tinjauan pengadaan, pengembangan sistem internal, dan 5 tahun koordinasi lintas batas jarak jauh.</span></p>
+        </div>
+        <div><div class="room-tags"><span class="room-tag">Activity Planning</span><span class="room-tag">Procurement</span><span class="room-tag">Remote Work</span><span class="room-tag">Systems Design</span></div>
+          <a href="ops/" class="room-cta"><span class="en">View Operations Portfolio</span><span class="id">Lihat Portofolio Operasional</span></a></div>
+      </div>
+    </div>
+    <div class="room-card room-travel" onclick="location.href='travel/'">
+      <div class="room-inner">
+        <div><div class="room-icon">✈️</div><p class="room-num"><span class="en">Portfolio 03</span><span class="id">Portofolio 03</span></p>
+          <h3 class="room-title"><span class="en">Travel Planning and Logistics</span><span class="id">Perencanaan Perjalanan dan Logistik</span></h3>
+          <p class="room-desc"><span class="en">Multi-scenario budgeting, multi-currency spend tracking, time-blocked itineraries, vendor research, contingency planning, and a personal carbon footprint tracker applying the UK DESNZ emission factor method.</span><span class="id">Anggaran multi-skenario, pelacakan pengeluaran multi-mata uang, itinerary berblok waktu, riset vendor, dan pelacak jejak karbon pribadi menggunakan metode emisi DESNZ Inggris.</span></p>
+        </div>
+        <div><div class="room-tags"><span class="room-tag">Multi-Currency Budget</span><span class="room-tag">Itinerary Design</span><span class="room-tag">Vendor Research</span><span class="room-tag">Carbon Tracking</span></div>
+          <a href="travel/" class="room-cta"><span class="en">View Travel Portfolio</span><span class="id">Lihat Portofolio Perjalanan</span></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <p class="sec-label"><span class="en">About</span><span class="id">Tentang Saya</span></p>
+  <h2 class="sec-h2"><span class="en">A bit about me</span><span class="id">Sedikit tentang saya</span></h2>
+  <div class="rule"></div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p><span class="en">I am a finance professional based in Surabaya, Indonesia, with a dual degree in Accounting from Airlangga University and Business Administration from Asia University in Taiwan, both completed in 2020.</span><span class="id">Saya adalah profesional keuangan yang berbasis di Surabaya, Indonesia, dengan gelar ganda di Akuntansi dari Universitas Airlangga dan Administrasi Bisnis dari Asia University di Taiwan, keduanya diselesaikan pada 2020.</span></p>
+      <p><span class="en">Most of my career has been in the NGO sector, specifically conservation finance at Yayasan Gajah Sumatera, where I managed grant compliance across six program areas, led a finance team of seven across three provinces, and built internal systems from scratch. Alongside that, I spent five years coordinating international contracts and client relationships remotely for a trading company across Taiwan and Vietnam.</span><span class="id">Sebagian besar karier saya berada di sektor NGO, khususnya di keuangan konservasi di Yayasan Gajah Sumatera, di mana saya mengelola kepatuhan hibah, memimpin tim keuangan tujuh orang di tiga provinsi, dan membangun sistem internal dari awal.</span></p>
+      <p><span class="en">I am currently building toward roles that combine finance, operations, and sustainability, and I am open to remote, hybrid, and relocation opportunities across Southeast Asia and beyond.</span><span class="id">Saat ini saya membangun menuju peran yang menggabungkan keuangan, operasional, dan keberlanjutan, dan saya terbuka untuk peluang jarak jauh, hybrid, dan relokasi.</span></p>
+    </div>
+    <div class="about-cards">
+      <div class="about-card"><p class="about-card-title"><span class="en">Education</span><span class="id">Pendidikan</span></p><p class="about-card-desc"><span class="en">BBA from Asia University, Taiwan (Grade A) and Associate in Accounting from Airlangga University (GPA 3.8), dual degree program 2016 to 2020.</span><span class="id">BBA dari Asia University, Taiwan (Nilai A) dan Akuntansi dari Universitas Airlangga (IPK 3.8), program gelar ganda 2016 hingga 2020.</span></p></div>
+      <div class="about-card"><p class="about-card-title"><span class="en">Languages</span><span class="id">Bahasa</span></p><p class="about-card-desc"><span class="en">Indonesian (native), English (C1 reading and listening, B2 writing and speaking), Chinese (beginner).</span><span class="id">Indonesia (asli), Inggris (C1 membaca dan mendengar, B2 menulis dan berbicara), Mandarin (pemula).</span></p></div>
+      <div class="about-card"><p class="about-card-title"><span class="en">Availability</span><span class="id">Ketersediaan</span></p><p class="about-card-desc"><span class="en">Open to remote, hybrid, and relocation. Available to travel up to 4 times yearly. Based in Surabaya.</span><span class="id">Terbuka untuk jarak jauh, hybrid, dan relokasi. Tersedia untuk perjalanan hingga 4 kali per tahun. Berbasis di Surabaya.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section id="timeline">
+  <p class="sec-label"><span class="en">Experience</span><span class="id">Pengalaman</span></p>
+  <h2 class="sec-h2"><span class="en">Where I have worked</span><span class="id">Di mana saya pernah bekerja</span></h2>
+  <div class="rule"></div>
+  <div class="tl-viewport">
+    <div class="tl-track" id="tlTrack">
+
+      <!-- Slide 1: 2024-2025, 2022-2023, 2022 -->
+      <div class="tl-slide">
+        <div class="tl-row">
+          <div class="tl-item">
+            <div class="tl-circle">🌐</div>
+            <p class="tl-num">01</p>
+            <p class="tl-role"><span class="en">Sales and Admin Coordinator</span><span class="id">Koordinator Penjualan dan Admin</span></p>
+            <p class="tl-org">Taiwan-Vietnam International</p>
+            <p class="tl-date">Jan 2024 – Sep 2025</p>
+            <p class="tl-desc"><span class="en">Administered contracts for international clients, resolved disputes, and coordinated cross-border transactions entirely remotely.</span><span class="id">Mengadministrasikan kontrak untuk klien internasional dan mengkoordinasikan transaksi lintas batas sepenuhnya jarak jauh.</span></p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-circle">📊</div>
+            <p class="tl-num">02</p>
+            <p class="tl-role"><span class="en">Senior Finance Officer</span><span class="id">Petugas Keuangan Senior</span></p>
+            <p class="tl-org">Yayasan Gajah Sumatera</p>
+            <p class="tl-date">Jul 2022 – Dec 2023</p>
+            <p class="tl-desc"><span class="en">Led a finance team of 7 across 3 provinces. Managed 6 donor-funded programs, designed a 5-digit COA, cut reporting turnaround by 2 days.</span><span class="id">Memimpin tim keuangan 7 orang di 3 provinsi. Mengelola 6 program berdonor, merancang COA 5 digit, memotong waktu pelaporan 2 hari.</span></p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-circle">📋</div>
+            <p class="tl-num">03</p>
+            <p class="tl-role"><span class="en">Finance Officer</span><span class="id">Petugas Keuangan</span></p>
+            <p class="tl-org">Yayasan Gajah Sumatera</p>
+            <p class="tl-date">Jan 2022 – Jun 2022</p>
+            <p class="tl-desc"><span class="en">Produced monthly balance sheets and cost variance analyses. Reviewed 10+ program activity reports monthly.</span><span class="id">Menghasilkan neraca bulanan dan analisis varians biaya. Meninjau 10+ laporan aktivitas program bulanan.</span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: 2020-2023, 2021, 2019 -->
+      <div class="tl-slide">
+        <div class="tl-row">
+          <div class="tl-item">
+            <div class="tl-circle">💼</div>
+            <p class="tl-num">04</p>
+            <p class="tl-role"><span class="en">Sales Administrator (Part-time)</span><span class="id">Administrator Penjualan (Paruh Waktu)</span></p>
+            <p class="tl-org">Taiwan-Vietnam International</p>
+            <p class="tl-date">Aug 2020 – Dec 2023</p>
+            <p class="tl-desc"><span class="en">Managed international client contracts and documentation alongside full-time NGO role.</span><span class="id">Mengelola kontrak klien internasional bersamaan dengan peran NGO penuh waktu.</span></p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-circle">🏢</div>
+            <p class="tl-num">05</p>
+            <p class="tl-role"><span class="en">Finance and Accounting Staff</span><span class="id">Staf Keuangan dan Akuntansi</span></p>
+            <p class="tl-org">PT Trihasta Panca Sejahtera</p>
+            <p class="tl-date">Feb 2021 – Jul 2021</p>
+            <p class="tl-desc"><span class="en">Handled journal entries, COGS reports, fixed asset register, and VAT recording in a corporate environment.</span><span class="id">Menangani jurnal, laporan HPP, daftar aset tetap, dan pencatatan PPN di lingkungan korporat.</span></p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-circle">🎓</div>
+            <p class="tl-num">06</p>
+            <p class="tl-role"><span class="en">Finance and Accounting Intern</span><span class="id">Magang Keuangan dan Akuntansi</span></p>
+            <p class="tl-org">PT Terminal Teluk Lamong</p>
+            <p class="tl-date">Feb 2019 – Jul 2019</p>
+            <p class="tl-desc"><span class="en">Supported proforma data reconciliation and accounting information system testing.</span><span class="id">Mendukung rekonsiliasi data proforma dan pengujian sistem informasi akuntansi.</span></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="tl-nav">
+    <button class="tl-btn" onclick="moveTl(-1)">←</button>
+    <div class="tl-dots" id="tlDots"></div>
+    <button class="tl-btn" onclick="moveTl(1)">→</button>
+  </div>
+</section>
+
+<section id="tools-skills">
+  <p class="sec-label"><span class="en">Tools and Skills</span><span class="id">Alat dan Keahlian</span></p>
+  <h2 class="sec-h2"><span class="en">What I work with</span><span class="id">Yang saya gunakan</span></h2>
+  <div class="rule"></div>
+  <div class="ts-grid">
+    <div>
+      <p class="ts-group-title"><span class="en">🛠 Tools</span><span class="id">🛠 Alat</span></p>
+      <div class="ts-cats">
+        <div class="ts-cat cat-accounting"><p class="ts-cat-label"><span class="en">Accounting and Finance</span><span class="id">Akuntansi dan Keuangan</span></p><div class="ts-chips"><span class="ts-chip">Accurate</span><span class="ts-chip">QuickBooks</span><span class="ts-chip">Xero</span></div></div>
+        <div class="ts-cat cat-productivity"><p class="ts-cat-label"><span class="en">Productivity and Collaboration</span><span class="id">Produktivitas dan Kolaborasi</span></p><div class="ts-chips"><span class="ts-chip">Microsoft Office</span><span class="ts-chip">Google Workspace</span><span class="ts-chip">Trello</span><span class="ts-chip">Notion</span><span class="ts-chip">Zoom</span><span class="ts-chip">Microsoft Teams</span></div></div>
+        <div class="ts-cat cat-excel"><p class="ts-cat-label">Excel</p><div class="ts-chips"><span class="ts-chip">Pivot Tables</span><span class="ts-chip">VLOOKUP and XLOOKUP</span><span class="ts-chip">Index-Match</span><span class="ts-chip">Scenario Modelling</span></div></div>
+      </div>
+    </div>
+    <div>
+      <p class="ts-group-title"><span class="en">💡 Skills</span><span class="id">💡 Keahlian</span></p>
+      <div class="ts-cats">
+        <div class="ts-cat cat-finance-skill"><p class="ts-cat-label"><span class="en">Finance and Compliance</span><span class="id">Keuangan dan Kepatuhan</span></p><div class="ts-chips"><span class="ts-chip">Grant Management</span><span class="ts-chip">Donor Compliance</span><span class="ts-chip">Budget Forecasting</span><span class="ts-chip">Project Finance Management</span><span class="ts-chip">Variance Analysis</span><span class="ts-chip">VAT Recording</span></div></div>
+        <div class="ts-cat cat-ops-skill"><p class="ts-cat-label"><span class="en">Operations and Coordination</span><span class="id">Operasional dan Koordinasi</span></p><div class="ts-chips"><span class="ts-chip">Activity Planning</span><span class="ts-chip">Procurement Review</span><span class="ts-chip">Remote Coordination</span><span class="ts-chip">Cross-cultural Communication</span><span class="ts-chip">Team Leadership</span></div></div>
+        <div class="ts-cat cat-sector"><p class="ts-cat-label"><span class="en">Sector Knowledge</span><span class="id">Pengetahuan Sektor</span></p><div class="ts-chips"><span class="ts-chip">Carbon Accounting</span><span class="ts-chip">Biodiversity Finance</span><span class="ts-chip">NGO Financial Reporting</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certs">
+  <p class="sec-label"><span class="en">Certificates</span><span class="id">Sertifikat</span></p>
+  <h2 class="sec-h2"><span class="en">Verified credentials</span><span class="id">Kredensial terverifikasi</span></h2>
+  <div class="rule"></div>
+  <div class="cert-carousel-wrap">
+    <div class="cert-track" id="certTrack">
+      <div class="cert-slide" onclick="openLb('certs/cert-excel.jpg','Microsoft Excel XL-Test · Score 98/100')">
+        <div class="cert-img-wrap"><img src="certs/cert-excel.jpg" alt="Excel Certificate" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="cert-img-placeholder" style="display:none;"><span>📊</span><p>Excel Certificate</p></div></div>
+        <div class="cert-info"><p class="cert-title">Microsoft Excel XL-Test</p><p class="cert-issuer">BelajarExcel.id · 2024</p><p class="cert-desc"><span class="en">Score 98/100. Covers pivot tables, vlookup, xlookup, index-match, and advanced formula application.</span><span class="id">Skor 98/100. Mencakup pivot table, vlookup, xlookup, index-match, dan penerapan formula tingkat lanjut.</span></p></div>
+      </div>
+      <div class="cert-slide" onclick="openLb('certs/cert-carbon.jpg','Introduction to Carbon Accounting · Rise Social · 2025')">
+        <div class="cert-img-wrap"><img src="certs/cert-carbon.jpg" alt="Carbon Accounting" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="cert-img-placeholder" style="display:none;"><span>🌿</span><p>Carbon Accounting</p></div></div>
+        <div class="cert-info"><p class="cert-title"><span class="en">Introduction to Carbon Accounting</span><span class="id">Pengantar Carbon Accounting</span></p><p class="cert-issuer">Rise Social · 2025</p><p class="cert-desc"><span class="en">Foundational training in carbon accounting principles, emission measurement, and reporting frameworks.</span><span class="id">Pelatihan dasar dalam prinsip carbon accounting, pengukuran emisi, dan kerangka pelaporan.</span></p></div>
+      </div>
+      <div class="cert-slide" onclick="openLb('certs/cert-biodiversity.jpg','Biodiversity Finance · UNDP · 2025')">
+        <div class="cert-img-wrap"><img src="certs/cert-biodiversity.jpg" alt="Biodiversity Finance" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="cert-img-placeholder" style="display:none;"><span>🌊</span><p>Biodiversity Finance</p></div></div>
+        <div class="cert-info"><p class="cert-title">Biodiversity Finance</p><p class="cert-issuer">UNDP · 2025</p><p class="cert-desc"><span class="en">Designing and Implementing Finance Solutions for Nature, covering biodiversity funding structures and conservation investment frameworks.</span><span class="id">Merancang dan Mengimplementasikan Solusi Keuangan untuk Alam, mencakup struktur pendanaan keanekaragaman hayati.</span></p></div>
+      </div>
+      <div class="cert-slide" onclick="openLb('certs/cert-ngo.jpg','NGO Financial Reporting · Yayasan Gajah Sumatera · 2023')">
+        <div class="cert-img-wrap"><img src="certs/cert-ngo.jpg" alt="NGO Financial Reporting" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="cert-img-placeholder" style="display:none;"><span>📋</span><p>NGO Reporting</p></div></div>
+        <div class="cert-info"><p class="cert-title"><span class="en">NGO Financial Reporting</span><span class="id">Pelaporan Keuangan NGO</span></p><p class="cert-issuer">Yayasan Gajah Sumatera · 2023</p><p class="cert-desc"><span class="en">Training in nonprofit financial reporting standards, grant documentation, and donor accountability practices.</span><span class="id">Pelatihan dalam standar pelaporan keuangan nirlaba, dokumentasi hibah, dan praktik akuntabilitas donor.</span></p></div>
+      </div>
+    </div>
+    <div class="cert-nav">
+      <button class="cert-btn" onclick="moveCerts(-1)">←</button>
+      <div class="cert-dots" id="certDots"></div>
+      <button class="cert-btn" onclick="moveCerts(1)">→</button>
+    </div>
+  </div>
+</section>
+
+<section id="opento">
+  <p class="sec-label"><span class="en">Open To</span><span class="id">Terbuka Untuk</span></p>
+  <h2 class="sec-h2"><span class="en">Roles I am currently considering</span><span class="id">Posisi yang sedang saya pertimbangkan</span></h2>
+  <p class="opento-note"><span class="en">Core roles reflect direct experience. Adjacent roles reflect where I am actively building toward.</span><span class="id">Peran inti mencerminkan pengalaman langsung. Peran terkait mencerminkan arah yang sedang saya bangun.</span></p>
+  <div class="roles-grid">
+    <div class="role core"><p class="role-title">Finance and Grant Officer</p><p class="role-type"><span class="en">Core · Direct NGO finance experience</span><span class="id">Inti · Pengalaman keuangan NGO langsung</span></p></div>
+    <div class="role core"><p class="role-title"><span class="en">Finance and Admin Staff</span><span class="id">Staf Keuangan dan Admin</span></p><p class="role-type"><span class="en">Core · Finance and admin breadth</span><span class="id">Inti · Cakupan keuangan dan admin</span></p></div>
+    <div class="role core"><p class="role-title"><span class="en">Operations Officer</span><span class="id">Petugas Operasional</span></p><p class="role-type"><span class="en">Core · Cross-functional coordination</span><span class="id">Inti · Koordinasi lintas fungsi</span></p></div>
+    <div class="role"><p class="role-title"><span class="en">Travel Operations Specialist</span><span class="id">Spesialis Operasional Perjalanan</span></p><p class="role-type"><span class="en">Adjacent · Planning, logistics, remote coordination</span><span class="id">Terkait · Perencanaan, logistik, koordinasi</span></p></div>
+    <div class="role"><p class="role-title"><span class="en">Program Admin Officer</span><span class="id">Petugas Administrasi Program</span></p><p class="role-type"><span class="en">Adjacent · Finance and program ops experience</span><span class="id">Terkait · Keuangan dan pengalaman ops program</span></p></div>
+    <div class="role"><p class="role-title">Business Operations</p><p class="role-type"><span class="en">Adjacent · Systems, coordination, documentation</span><span class="id">Terkait · Sistem, koordinasi, dokumentasi</span></p></div>
+  </div>
+</section>
+
+<section id="contact-bar">
+  <div class="cbar-inner">
+    <div>
+      <p class="cbar-label"><span class="en">Get In Touch</span><span class="id">Hubungi Saya</span></p>
+      <h2 class="cbar-h2"><span class="en">Let's talk about what I can contribute.</span><span class="id">Mari bicara tentang apa yang bisa saya kontribusikan.</span></h2>
+      <p class="cbar-p"><span class="en">I am open to new opportunities across finance, operations, and travel logistics, whether remote, hybrid, or on-site. If something here looks relevant to what you need, reach out directly.</span><span class="id">Saya terbuka untuk peluang baru di keuangan, operasional, dan logistik perjalanan, baik jarak jauh, hybrid, maupun on-site.</span></p>
+    </div>
+    <div class="cbar-r">
+      <div class="cbar-btns">
+        <a href="mailto:adiendasaman11@outlook.com" class="btn btn-fill"><span class="en">Send an Email</span><span class="id">Kirim Email</span></a>
+        <a href="https://calendly.com/adienda-saman/schedule-a-call-job-interview" target="_blank" class="btn btn-out"><span class="en">Book a Meeting</span><span class="id">Jadwalkan Pertemuan</span></a>
+      </div>
+      <div class="cbar-links">
+        <a href="mailto:adiendasaman11@outlook.com" class="cbar-link">adiendasaman11@outlook.com</a>
+        <a href="https://www.linkedin.com/in/adienda-rizkya-yustika-saman/" target="_blank" class="cbar-link">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="ft-name">Adienda Saman</span>
+  <div class="ft-links"><a href="finance/" class="ft-link">Finance</a><a href="ops/" class="ft-link">Operations</a><a href="travel/" class="ft-link">Travel</a></div>
+  <span class="ft-note">© 2026 · Surabaya, Indonesia</span>
+</footer>
+
+<div id="lightbox" onclick="if(event.target===this)closeLb()">
+  <button id="lb-close" onclick="closeLb()">✕</button>
+  <img id="lb-img" src="" alt=""/>
+  <p id="lb-cap"></p>
+</div>
+
+<script>
+function setLang(l){document.body.setAttribute('data-lang',l);document.getElementById('btn-en').classList.toggle('on',l==='en');document.getElementById('btn-id').classList.toggle('on',l==='id');}
+
+// Timeline carousel
+const tlTrack=document.getElementById('tlTrack');
+const tlSlides=tlTrack.querySelectorAll('.tl-slide');
+const tlTotal=tlSlides.length;
+let tlIdx=0;
+const tlDotsWrap=document.getElementById('tlDots');
+tlDotsWrap.innerHTML='';
+for(let i=0;i<tlTotal;i++){const d=document.createElement('div');d.className='tl-dot'+(i===0?' on':'');d.onclick=()=>goTl(i);tlDotsWrap.appendChild(d);}
+function updateTl(){const w=tlTrack.parentElement.offsetWidth;tlTrack.style.transform=`translateX(-${tlIdx*w}px)`;tlTrack.style.transition='transform .4s ease';tlDotsWrap.querySelectorAll('.tl-dot').forEach((d,i)=>d.classList.toggle('on',i===tlIdx));}
+function moveTl(dir){tlIdx=Math.max(0,Math.min(tlIdx+dir,tlTotal-1));updateTl();}
+function goTl(i){tlIdx=i;updateTl();}
+
+// Certificate carousel — infinite loop
+const certTrack=document.getElementById('certTrack');
+const certSlides=Array.from(certTrack.querySelectorAll('.cert-slide'));
+const certTotal=certSlides.length;
+const certDotsWrap=document.getElementById('certDots');
+let certIdx=0;
+// clone for smooth loop
+certSlides.forEach(s=>certTrack.appendChild(s.cloneNode(true)));
+certDotsWrap.innerHTML='';
+for(let i=0;i<certTotal;i++){const d=document.createElement('div');d.className='cert-dot'+(i===0?' on':'');d.onclick=()=>goToCert(i);certDotsWrap.appendChild(d);}
+function updateCerts(){const w=certSlides[0].offsetWidth+20;certTrack.style.transform=`translateX(-${certIdx*w}px)`;certTrack.style.transition='transform .35s ease';certDotsWrap.querySelectorAll('.cert-dot').forEach((d,i)=>d.classList.toggle('on',i===certIdx%certTotal));}
+function moveCerts(dir){certIdx=(certIdx+dir+certTotal)%certTotal;updateCerts();}
+function goToCert(i){certIdx=i;updateCerts();}
+setInterval(()=>moveCerts(1),4000);
+// bind all cert slides including clones
+document.querySelectorAll('.cert-slide').forEach(s=>{s.onclick=function(){const img=this.querySelector('img');if(img&&img.src&&!img.src.endsWith('undefined'))openLb(img.src,this.querySelector('.cert-title')?.textContent||'');};});
+
+// Lightbox
+function openLb(src,cap){document.getElementById('lb-img').src=src;document.getElementById('lb-cap').textContent=cap||'';document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
+function closeLb(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
+</script>
+</body>
+</html>

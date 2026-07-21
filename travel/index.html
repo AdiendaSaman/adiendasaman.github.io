@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Adienda Saman — Travel Planning & Logistics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#FEFAF5;--white:#FFF;--warm:#F5EDE0;--sand:#E8D5BC;
+  --rust:#B5652A;--amber:#D4853E;--gold:#E8A870;
+  --ink:#1E1610;--mid:#6B5040;--stone:#A08060;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Plus Jakarta Sans',system-ui,sans-serif;
+  --r:8px;--shadow:0 4px 24px rgba(30,22,16,.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:16px;line-height:1.75;font-weight:300;}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+
+#nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(30,22,16,.97);height:56px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;overflow:hidden;}
+.nav-brand{font-family:var(--serif);font-size:17px;color:var(--gold);}
+.nav-r{display:flex;align-items:center;gap:20px;}
+.nav-link{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);transition:color .2s;}
+.nav-link:hover{color:var(--gold);}
+.nav-back{padding:6px 14px;border:1.5px solid var(--sand);border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);transition:all .2s;}
+.nav-back:hover{border-color:var(--amber);color:var(--rust);}
+#lt{display:flex;border:1.5px solid var(--sand);border-radius:20px;overflow:hidden;}
+.lb{padding:5px 13px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:none;background:transparent;color:var(--stone);cursor:pointer;transition:all .2s;}
+.lb.on{background:var(--amber);color:var(--white);}
+.en{display:block!important;}.id{display:none!important;}
+span.en{display:inline!important;}span.id{display:none!important;}
+[data-lang="id"] .en{display:none!important;}[data-lang="id"] .id{display:block!important;}
+[data-lang="id"] span.en{display:none!important;}[data-lang="id"] span.id{display:inline!important;}
+
+/* HERO — full width text + buttons right */
+#hero{padding-top:56px;background:linear-gradient(145deg,#1E1610,#2B1E14);position:relative;overflow:hidden;}
+#hero::before{content:'';position:absolute;top:-80px;right:-80px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(212,133,62,.15),transparent 70%);pointer-events:none;}
+.hero-inner{padding:80px 72px 72px;display:grid;grid-template-columns:3fr 2fr;gap:72px;align-items:center;position:relative;z-index:1;min-height:52vh;}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:22px;}
+.hero-eyebrow::after{content:'';flex:1;height:1px;background:rgba(212,133,62,.3);}
+.hero-h1{font-family:var(--serif);font-size:clamp(40px,4vw,60px);font-weight:700;line-height:1;color:var(--white);margin-bottom:14px;}
+.hero-sub{font-family:var(--serif);font-size:clamp(15px,1.4vw,20px);font-style:italic;color:var(--gold);margin-bottom:16px;line-height:1.5;}
+.hero-p{font-size:14px;color:rgba(250,243,235,.65);line-height:1.85;margin-bottom:0;}
+.hero-right{display:flex;flex-direction:column;justify-content:center;align-items:stretch;gap:16px;border-left:1px solid rgba(212,133,62,.2);padding-left:48px;}
+.hero-right-label{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(232,168,112,.7);margin-bottom:6px;}
+/* KPI strip — bright warm amber, fully visible text */
+#hero-kpis{background:#E8A850;border-top:3px solid #C47830;display:grid;grid-template-columns:repeat(5,1fr);}
+.hsp-box{padding:22px 20px;border-right:1px solid rgba(30,22,16,.12);text-align:center;}
+.hsp-box:last-child{border-right:none;}
+.hsp-n{font-family:var(--serif);font-size:36px;font-weight:700;color:#1E1610;line-height:1;margin-bottom:5px;}
+.hsp-l{font-size:12px;color:#3A2010;line-height:1.45;font-weight:500;opacity:1;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border-radius:var(--r);transition:all .2s;cursor:pointer;border:none;}
+.btn-fill{background:var(--amber);color:var(--ink);}
+.btn-fill:hover{background:var(--gold);transform:translateY(-1px);}
+.btn-out{background:transparent;color:var(--gold);border:1.5px solid rgba(212,133,62,.5);}
+.btn-out:hover{border-color:var(--gold);}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
+
+
+
+.sec{padding:72px;}
+.tag{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);margin-bottom:10px;}
+.h2{font-family:var(--serif);font-size:clamp(28px,3vw,44px);font-weight:700;color:var(--ink);line-height:1.15;margin-bottom:12px;}
+.h2-sub{font-size:15px;color:var(--mid);line-height:1.8;margin-bottom:44px;max-width:580px;}
+.rule{width:40px;height:2px;background:var(--amber);margin-bottom:40px;}
+
+/* CASES */
+#cases{background:var(--white);}
+.case{background:var(--white);border:1px solid var(--sand);border-radius:var(--r);overflow:hidden;margin-bottom:20px;box-shadow:var(--shadow);}
+.case:last-child{margin-bottom:0;}
+.case-layout{display:grid;grid-template-columns:260px 1fr;min-height:260px;}
+.case-color{display:flex;flex-direction:column;justify-content:space-between;padding:32px 28px;}
+.case-num{font-family:var(--serif);font-size:56px;font-weight:700;color:rgba(255,255,255,.12);line-height:1;}
+.case-h{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--white);line-height:1.2;margin-bottom:5px;}
+.case-loc{font-size:11.5px;color:rgba(255,255,255,.55);margin-bottom:14px;}
+.case-badges{display:flex;flex-wrap:wrap;gap:5px;}
+.badge{font-size:10px;padding:3px 9px;border-radius:20px;font-weight:600;letter-spacing:.04em;background:rgba(255,255,255,.1);color:rgba(255,255,255,.75);}
+.c1{background:linear-gradient(145deg,#5C3D20,#8B5A2B);}
+.c2{background:linear-gradient(145deg,#2B3D5C,#3D5C8B);}
+.c3{background:linear-gradient(145deg,#2B4A3D,#3D6B55);}
+.c4{background:linear-gradient(145deg,#3D2B4A,#5C3D6B);}
+.c5{background:linear-gradient(145deg,#4A2B2B,#6B3D3D);}
+.case-body{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.case-text{padding:28px 28px 24px;border-right:1px solid var(--sand);}
+.case-text-label{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:8px;}
+.case-text-body{font-size:13.5px;color:var(--mid);line-height:1.8;margin-bottom:16px;}
+.case-metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px;}
+.cm{padding:12px 14px;background:var(--warm);border-radius:var(--r);}
+.cm-n{font-family:var(--serif);font-size:24px;font-weight:700;color:var(--rust);line-height:1;margin-bottom:2px;}
+.cm-l{font-size:11px;color:var(--mid);line-height:1.4;}
+
+/* CARD CAROUSEL for cases */
+.case-carousel{padding:20px 20px 16px;background:var(--warm);}
+.card-img-track-wrap{position:relative;width:100%;height:180px;overflow:hidden;border-radius:6px;cursor:zoom-in;}
+.card-img-track{display:flex;height:100%;transition:transform .3s ease;}
+.card-img-slide{flex:0 0 100%;height:100%;display:flex;align-items:center;justify-content:center;}
+.card-img-slide img{width:100%;height:100%;object-fit:cover;}
+.card-img-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:var(--sand);padding:0 12px;text-align:center;}
+.card-img-placeholder span{font-size:26px;}
+.card-img-placeholder p{font-size:11px;color:var(--stone);font-style:italic;}
+.card-nav{display:flex;align-items:center;justify-content:space-between;margin-top:10px;}
+.card-nav-btn{width:28px;height:28px;border-radius:50%;border:1px solid var(--sand);background:var(--white);cursor:pointer;font-size:12px;color:var(--mid);display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.card-nav-btn:hover{border-color:var(--amber);color:var(--amber);}
+.card-dots{display:flex;gap:6px;}
+.card-dot{width:6px;height:6px;border-radius:50%;background:var(--sand);cursor:pointer;transition:background .2s;}
+.card-dot.on{background:var(--amber);}
+
+/* DUMMY BANNER */
+.dummy-banner{display:flex;align-items:center;gap:8px;padding:8px 14px;background:#FFF8E7;border:1.5px solid #F0C040;border-radius:6px;margin-bottom:12px;}
+.dummy-banner span{font-size:12px;color:#8B6800;font-weight:600;}
+
+/* CARBON TRACKER */
+#carbon{background:linear-gradient(145deg,#0D2416,#1A3D28);padding:72px;}
+#carbon .tag{color:#7FC49B;}
+#carbon .h2{color:var(--white);}
+#carbon .h2-sub{color:rgba(143,191,160,.7);}
+.carbon-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;}
+.carbon-desc{font-size:15px;color:rgba(143,191,160,.75);line-height:1.85;margin-bottom:24px;}
+.carbon-why{background:rgba(255,255,255,.04);border:1px solid rgba(143,191,160,.15);border-radius:var(--r);padding:22px 24px;}
+.carbon-why-title{font-family:var(--serif);font-size:17px;color:var(--white);margin-bottom:10px;}
+.carbon-why-text{font-size:13.5px;color:rgba(143,191,160,.65);line-height:1.8;}
+.carbon-sample{background:rgba(255,255,255,.03);border:1px solid rgba(143,191,160,.15);border-radius:var(--r);overflow:hidden;}
+.carbon-sample-head{padding:20px 22px;border-bottom:1px solid rgba(143,191,160,.1);}
+.carbon-sample-title{font-family:var(--serif);font-size:19px;color:var(--white);margin-bottom:4px;}
+.carbon-sample-sub{font-size:12px;color:rgba(143,191,160,.5);text-transform:uppercase;letter-spacing:.08em;}
+.carbon-carousel{padding:16px;}
+.carbon-img-wrap{width:100%;height:200px;border-radius:6px;overflow:hidden;cursor:zoom-in;background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;}
+.carbon-img-placeholder{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding:0 16px;}
+.carbon-img-placeholder span{font-size:32px;}
+.carbon-img-placeholder p{font-size:12px;color:rgba(143,191,160,.5);font-style:italic;}
+.carbon-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:2px;}
+.cm-green{padding:14px 16px;background:rgba(255,255,255,.03);text-align:center;}
+.cm-green-n{font-family:var(--serif);font-size:22px;font-weight:700;color:#7FC49B;line-height:1;margin-bottom:3px;}
+.cm-green-l{font-size:11px;color:rgba(143,191,160,.5);line-height:1.4;}
+
+/* SKILLS */
+#skills{background:var(--warm);}
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.sk{padding:24px 20px;background:var(--white);border:1px solid var(--sand);border-radius:var(--r);transition:all .2s;}
+.sk:hover{border-color:var(--amber);transform:translateY(-2px);box-shadow:var(--shadow);}
+.sk-icon{font-size:22px;margin-bottom:10px;}
+.sk-title{font-family:var(--serif);font-size:17px;font-weight:700;color:var(--ink);margin-bottom:6px;}
+.sk-desc{font-size:13px;color:var(--mid);line-height:1.75;}
+
+/* TOOLS */
+#tools{background:var(--ink);padding:64px 72px;}
+#tools .tag{color:var(--gold);}
+#tools .h2{color:var(--white);}
+.tools-wrap{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;}
+.tool{padding:8px 16px;background:rgba(255,255,255,.05);border:1px solid rgba(232,168,112,.2);border-radius:20px;font-size:13px;color:rgba(255,255,255,.6);transition:all .2s;}
+.tool:hover{border-color:var(--gold);color:var(--gold);}
+.tool.hi{border-color:rgba(212,133,62,.4);color:var(--gold);}
+
+/* CERT */
+#cert{background:var(--bg);padding:56px 72px;}
+.cert-card{display:inline-flex;align-items:center;gap:14px;padding:16px 22px;background:var(--white);border:1px solid var(--sand);border-radius:var(--r);box-shadow:var(--shadow);}
+.cert-icon{font-size:24px;}
+.cert-title{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--ink);margin-bottom:2px;}
+.cert-meta{font-size:12px;color:var(--stone);}
+
+/* DISC */
+#disc{background:var(--sand);padding:22px 72px;}
+.disc-inner{display:flex;gap:12px;max-width:800px;}
+.disc-ico{font-size:17px;flex-shrink:0;margin-top:3px;}
+.disc-txt{font-size:13px;color:var(--mid);line-height:1.75;}
+.disc-txt strong{color:var(--ink);font-weight:600;}
+
+/* CTA */
+#cta{
+  position:relative;text-align:center;padding:80px 72px;overflow:hidden;
+  background:linear-gradient(145deg,#1E1610,#2B1E14);
+}
+#cta::before{
+  content:'';position:absolute;inset:0;
+  background-image:url('cta-bg.jpg');
+  background-size:cover;background-position:center;
+  opacity:0.12;z-index:0;
+}
+#cta>*{position:relative;z-index:1;}
+#cta .tag{color:var(--gold);}
+#cta .h2{color:var(--white);margin-bottom:10px;}
+.cta-p{font-size:15px;color:rgba(250,243,235,.65);margin-bottom:36px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.8;}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:24px;}
+.cta-links{display:flex;gap:22px;justify-content:center;}
+.cl{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,243,235,.5);transition:color .2s;}
+.cl:hover{color:var(--gold);}
+
+footer{background:var(--warm);border-top:1px solid var(--sand);padding:20px 72px;display:flex;justify-content:space-between;align-items:center;}
+.ft-name{font-family:var(--serif);font-size:14px;font-weight:700;color:var(--stone);}
+.ft-note{font-size:12px;color:var(--sand);}
+.ft-back{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--stone);transition:color .2s;}
+.ft-back:hover{color:var(--rust);}
+
+#lightbox{position:fixed;inset:0;z-index:999;background:rgba(30,22,16,.94);display:none;align-items:center;justify-content:center;padding:32px;}
+#lightbox.open{display:flex;}
+#lb-img{max-width:90vw;max-height:85vh;border-radius:8px;object-fit:contain;}
+#lb-close{position:absolute;top:18px;right:22px;font-size:26px;color:rgba(255,255,255,.7);cursor:pointer;background:none;border:none;}
+#lb-cap{position:absolute;bottom:18px;left:0;right:0;text-align:center;color:rgba(232,168,112,.6);font-size:12px;}
+
+@media(max-width:960px){
+  #hero{grid-template-columns:1fr;min-height:auto;}
+  .hero-inner{padding:64px 32px 36px;}
+  .hero-stats-panel{padding:20px 32px 52px;display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+  .case-layout{grid-template-columns:1fr;}
+  .case-body{grid-template-columns:1fr;}
+  .case-text{border-right:none;border-bottom:1px solid var(--sand);}
+  .carbon-grid{grid-template-columns:1fr;}
+  .skills-grid{grid-template-columns:1fr 1fr;}
+  .sec,#carbon,#tools,#cert,#disc,#cta{padding-left:32px;padding-right:32px;}
+  footer{padding:16px 32px;flex-direction:column;gap:8px;text-align:center;}
+  #nav{padding:0 20px;}
+}
+@media(max-width:560px){
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .skills-grid{grid-template-columns:1fr;}
+  .hero-inner{padding:56px 20px;}
+  .sec{padding:40px 20px;}
+  #carbon,#tools,#cert,#disc,#cta{padding-left:20px;padding-right:20px;}
+  footer{padding:14px 20px;}
+  #nav{padding:0 16px;}
+}
+</style>
+</head>
+<body data-lang="en">
+
+<nav id="nav">
+  <a href="../" class="nav-brand">Adienda Saman</a>
+  <div class="nav-r">
+    <a href="#cases" class="nav-link">Work</a>
+    <a href="#carbon" class="nav-link">Carbon</a>
+    <a href="#skills" class="nav-link">Skills</a>
+    <a href="#cta" class="nav-link">Contact</a>
+    <a href="../" class="nav-back">← <span class="en">All Portfolios</span><span class="id">Semua Portofolio</span></a>
+    <div id="lt"><button class="lb on" id="ben" onclick="setLang('en')">EN</button><button class="lb" id="bid" onclick="setLang('id')">ID</button></div>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-inner">
+    <div>
+      <p class="hero-eyebrow"><span class="en">Travel Planning and Logistics</span><span class="id">Perencanaan Perjalanan dan Logistik</span></p>
+      <h1 class="hero-h1"><span class="en">Every trip starts<br/>with a plan.</span><span class="id">Setiap perjalanan<br/>dimulai dengan rencana.</span></h1>
+      <p class="hero-sub"><span class="en">Mine starts with a spreadsheet.</span><span class="id">Saya memulainya dengan spreadsheet.</span></p>
+      <p class="hero-p"><span class="en">I plan travel the way operations professionals should: scenario comparisons before booking, multi-currency budgets, time-blocked itineraries, vendor research, contingency notes, and post-trip reconciliation. I also track personal travel carbon footprints using the distance-based emission factor method from the UK Department of Energy Security and Net Zero (DESNZ) greenhouse gas conversion factors.</span><span class="id">Saya merencanakan perjalanan seperti yang seharusnya dilakukan profesional operasional: perbandingan skenario, anggaran multi-mata uang, itinerary berblok waktu, riset vendor, dan rekonsiliasi pasca-perjalanan. Saya juga melacak jejak karbon menggunakan metode berbasis jarak dari faktor emisi DESNZ Inggris.</span></p>
+    </div>
+    <div class="hero-right">
+      <p class="hero-right-label"><span class="en">Ready to explore?</span><span class="id">Siap menjelajahi?</span></p>
+      <div class="hero-btns">
+        <a href="#cases" class="btn btn-fill"><span class="en">See the Work</span><span class="id">Lihat Pekerjaan</span></a>
+        <a href="#cta" class="btn btn-out"><span class="en">Get In Touch</span><span class="id">Hubungi Saya</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+<div id="hero-kpis">
+  <div class="hsp-box"><p class="hsp-n">5</p><p class="hsp-l"><span class="en">Countries planned and executed independently</span><span class="id">Negara direncanakan dan dieksekusi mandiri</span></p></div>
+  <div class="hsp-box"><p class="hsp-n">4</p><p class="hsp-l"><span class="en">Budget scenarios built before booking a single trip</span><span class="id">Skenario anggaran dibangun sebelum booking</span></p></div>
+  <div class="hsp-box"><p class="hsp-n">16</p><p class="hsp-l"><span class="en">Days across 5 countries, time-blocked to 30 minutes</span><span class="id">Hari di 5 negara, diblok waktu per 30 menit</span></p></div>
+  <div class="hsp-box"><p class="hsp-n">5</p><p class="hsp-l"><span class="en">Currencies: IDR, SGD, VND, THB, MYR</span><span class="id">Mata uang: IDR, SGD, VND, THB, MYR</span></p></div>
+  <div class="hsp-box"><p class="hsp-n">CO₂</p><p class="hsp-l"><span class="en">Tracked using UK DESNZ distance-based emission factors</span><span class="id">Dilacak menggunakan faktor emisi jarak DESNZ Inggris</span></p></div>
+</div>
+
+
+
+<!-- CASES -->
+<section id="cases" class="sec">
+  <p class="tag"><span class="en">Portfolio</span><span class="id">Portofolio</span></p>
+  <h2 class="h2"><span class="en">Real trips & simulated tools.</span><span class="id">Perjalanan nyata & alat simulasi.</span></h2>
+  <p class="h2-sub"><span class="en">Personal projects are labelled as such. Simulated tools are clearly marked — built to demonstrate professional travel operations skills, not to misrepresent experience. Click any image to zoom in.</span><span class="id">Proyek pribadi diberi label. Alat simulasi ditandai jelas. Klik gambar untuk memperbesar.</span></p>
+
+  <!-- Case 1: Banda Naira -->
+  <div class="case">
+    <div class="case-layout">
+      <div class="case-color c1">
+        <span class="case-num">01</span>
+        <div>
+          <p class="case-h"><span class="en">Banda Naira Budget & Itinerary</span><span class="id">Anggaran & Itinerary Banda Naira</span></p>
+          <p class="case-loc">Banda Islands, Maluku · <span class="en">Personal Project</span><span class="id">Proyek Pribadi</span></p>
+          <div class="case-badges"><span class="badge">Multi-Scenario Budget</span><span class="badge">Actual vs Plan</span><span class="badge">Vendor Contacts</span></div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-text">
+          <p class="case-text-label"><span class="en">What I built</span><span class="id">Yang saya buat</span></p>
+          <p class="case-text-body"><span class="en">Four complete budget scenarios comparing all combinations of transport (flight vs ship) and accommodation before committing. After the trip, I tracked every actual expense and reconciled against plan. A separate sheet documented vendor contacts, seasonal notes, and tips for future reference.</span><span class="id">Empat skenario anggaran lengkap membandingkan semua kombinasi transportasi dan akomodasi sebelum memutuskan. Setelah perjalanan, saya melacak setiap pengeluaran aktual dan merekonsiliasi dengan rencana.</span></p>
+          <div class="case-metrics">
+            <div class="cm"><p class="cm-n">4</p><p class="cm-l"><span class="en">Budget scenarios before booking</span><span class="id">Skenario anggaran sebelum booking</span></p></div>
+            <div class="cm"><p class="cm-n">5</p><p class="cm-l"><span class="en">Sheets: plan, actual, itinerary, tips, contacts</span><span class="id">Sheet: rencana, aktual, itinerary, tips, kontak</span></p></div>
+          </div>
+        </div>
+        <div class="case-carousel">
+          <div class="card-img-track-wrap" id="wrap-bn"><div class="card-img-track" id="track-bn">
+            <div class="card-img-slide"><div class="card-img-placeholder"><span>📊</span><p><span class="en">Add blurred scenario comparison sheet screenshot</span><span class="id">Tambahkan screenshot sheet perbandingan skenario yang diburamkan</span></p></div></div>
+            <div class="card-img-slide"><div class="card-img-placeholder"><span>📋</span><p><span class="en">Add actual vs planned reconciliation view</span><span class="id">Tambahkan tampilan rekonsiliasi aktual vs rencana</span></p></div></div>
+            <div class="card-img-slide"><div class="card-img-placeholder"><span>🗓️</span><p><span class="en">Add day-by-day itinerary view</span><span class="id">Tambahkan tampilan itinerary harian</span></p></div></div>
+          </div></div>
+          <div class="card-nav"><button class="card-nav-btn" onclick="moveCard('bn',-1)">←</button><div class="card-dots" id="dots-bn"></div><button class="card-nav-btn" onclick="moveCard('bn',1)">→</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Case 2: ASEAN -->
+  <div class="case">
+    <div class="case-layout">
+      <div class="case-color c2">
+        <span class="case-num">02</span>
+        <div>
+          <p class="case-h"><span class="en">16-Day ASEAN Logistics</span><span class="id">Logistik ASEAN 16 Hari</span></p>
+          <p class="case-loc">Singapore · Vietnam · Thailand · Malaysia · <span class="en">Personal Project</span><span class="id">Proyek Pribadi</span></p>
+          <div class="case-badges"><span class="badge">5 Currencies</span><span class="badge">Border Crossings</span><span class="badge">30-Min Time Blocks</span><span class="badge">Halal Routing</span></div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-text">
+          <p class="case-text-label"><span class="en">What I built</span><span class="id">Yang saya buat</span></p>
+          <p class="case-text-body"><span class="en">16 days across 5 countries — every segment time-blocked to 30 minutes, with transport options and local currency costs, border crossing procedures, accommodation references, halal food locations, prayer time tracking across time zones, and contingency notes for seasonal risks.</span><span class="id">16 hari di 5 negara — setiap segmen diblok waktu per 30 menit, dengan opsi transportasi dan biaya mata uang lokal, prosedur penyeberangan perbatasan, lokasi makanan halal, pelacakan waktu sholat, dan catatan kontingensi.</span></p>
+          <div class="case-metrics">
+            <div class="cm"><p class="cm-n">16</p><p class="cm-l"><span class="en">Days, 30-min blocks</span><span class="id">Hari, blok 30 menit</span></p></div>
+            <div class="cm"><p class="cm-n">5</p><p class="cm-l"><span class="en">Currencies: IDR, SGD, VND, THB, MYR</span><span class="id">Mata uang: IDR, SGD, VND, THB, MYR</span></p></div>
+            <div class="cm"><p class="cm-n">6</p><p class="cm-l"><span class="en">Border crossings documented</span><span class="id">Penyeberangan perbatasan terdokumentasi</span></p></div>
+            <div class="cm"><p class="cm-n">5+</p><p class="cm-l"><span class="en">Sheets covering all dimensions</span><span class="id">Sheet mencakup semua dimensi</span></p></div>
+          </div>
+        </div>
+        <div class="case-carousel">
+          <div class="card-img-track-wrap" id="wrap-asean"><div class="card-img-track" id="track-asean">
+            <div class="card-img-slide"><div class="card-img-placeholder"><span>🗺️</span><p><span class="en">Add ASEAN schedule screenshot (time-blocked view)</span><span class="id">Tambahkan screenshot jadwal ASEAN (tampilan blok waktu)</span></p></div></div>
+            <div class="card-img-slide"><div class="card-img-placeholder"><span>💱</span><p><span class="en">Add multi-currency budget breakdown view</span><span class="id">Tambahkan tampilan rincian anggaran multi-mata uang</span></p></div></div>
+            <div class="card-img-slide"><div class="card-img-placeholder"><span>🛂</span><p><span class="en">Add border crossing procedures view</span><span class="id">Tambahkan tampilan prosedur penyeberangan perbatasan</span></p></div></div>
+          </div></div>
+          <div class="card-nav"><button class="card-nav-btn" onclick="moveCard('asean',-1)">←</button><div class="card-dots" id="dots-asean"></div><button class="card-nav-btn" onclick="moveCard('asean',1)">→</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Case 3: Spend Dashboard DUMMY -->
+  <div class="case">
+    <div class="case-layout">
+      <div class="case-color c3">
+        <span class="case-num">03</span>
+        <div>
+          <p class="case-h"><span class="en">Corporate Travel Spend Dashboard</span><span class="id">Dashboard Pengeluaran Perjalanan Korporat</span></p>
+          <p class="case-loc"><span class="en">Simulated · Practice Exercise</span><span class="id">Simulasi · Latihan</span></p>
+          <div class="case-badges"><span class="badge">Spend Monitoring</span><span class="badge">Policy Compliance</span><span class="badge">Cost Centre Tracking</span></div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-text">
+          <div class="dummy-banner">⚠️ <span><span class="en">Simulated project — all data is fictional. Built to demonstrate spend monitoring and policy compliance skills.</span><span class="id">Proyek simulasi — semua data fiktif. Dibuat untuk mendemonstrasikan keahlian pemantauan pengeluaran.</span></span></div>
+          <p class="case-text-label"><span class="en">What this demonstrates</span><span class="id">Yang didemonstrasikan</span></p>
+          <p class="case-text-body"><span class="en">A monthly corporate travel spend tracker for 10 fictional employees — flights, hotels, ground transport, and meals. Each booking flagged for policy compliance: over-budget, out-of-policy vendor, or missing receipt. Maps directly to "monitor trends, spend, and compliance with company policy."</span><span class="id">Pelacak pengeluaran perjalanan korporat bulanan untuk 10 karyawan fiktif. Setiap pemesanan ditandai untuk kepatuhan kebijakan.</span></p>
+        </div>
+        <div class="case-carousel">
+          <div class="card-img-track-wrap" id="wrap-dash"><div class="card-img-track" id="track-dash">
+            <div class="card-img-slide"><div class="card-img-placeholder"><span>📋</span><p><span class="en">Add spend dashboard screenshot (fictional data only)</span><span class="id">Tambahkan screenshot dashboard pengeluaran (hanya data fiktif)</span></p></div></div>
+            <div class="card-img-slide"><div class="card-img-placeholder"><span>🚩</span><p><span class="en">Add policy compliance flag view</span><span class="id">Tambahkan tampilan tanda kepatuhan kebijakan</span></p></div></div>
+          </div></div>
+          <div class="card-nav"><button class="card-nav-btn" onclick="moveCard('dash',-1)">←</button><div class="card-dots" id="dots-dash"></div><button class="card-nav-btn" onclick="moveCard('dash',1)">→</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Case 4: Vendor Scorecard DUMMY -->
+  <div class="case">
+    <div class="case-layout">
+      <div class="case-color c4">
+        <span class="case-num">04</span>
+        <div>
+          <p class="case-h"><span class="en">Travel Vendor Scorecard</span><span class="id">Scorecard Vendor Perjalanan</span></p>
+          <p class="case-loc"><span class="en">Simulated · Practice Exercise</span><span class="id">Simulasi · Latihan</span></p>
+          <div class="case-badges"><span class="badge">Vendor Accountability</span><span class="badge">Structured Evaluation</span></div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-text">
+          <div class="dummy-banner">⚠️ <span><span class="en">Simulated project — all vendor names and ratings are fictional.</span><span class="id">Proyek simulasi — semua nama vendor dan penilaian bersifat fiktif.</span></span></div>
+          <p class="case-text-label"><span class="en">What this demonstrates</span><span class="id">Yang didemonstrasikan</span></p>
+          <p class="case-text-body"><span class="en">Structured evaluation comparing three fictional hotel vendors across service quality, price consistency, cancellation flexibility, response time, and past issue resolution. Maps to "hold travel vendors accountable for providing excellent service."</span><span class="id">Evaluasi terstruktur membandingkan tiga vendor hotel fiktif di seluruh kualitas layanan, konsistensi harga, dan fleksibilitas pembatalan.</span></p>
+        </div>
+        <div class="case-carousel">
+          <div class="card-img-track-wrap" id="wrap-vc"><div class="card-img-track" id="track-vc">
+            <div class="card-img-slide"><div class="card-img-placeholder"><span>📊</span><p><span class="en">Add vendor scorecard screenshot (fictional vendors only)</span><span class="id">Tambahkan screenshot scorecard vendor (hanya vendor fiktif)</span></p></div></div>
+            <div class="card-img-slide"><div class="card-img-placeholder"><span>⭐</span><p><span class="en">Add weighted scoring summary view</span><span class="id">Tambahkan tampilan ringkasan skor berbobot</span></p></div></div>
+          </div></div>
+          <div class="card-nav"><button class="card-nav-btn" onclick="moveCard('vc',-1)">←</button><div class="card-dots" id="dots-vc"></div><button class="card-nav-btn" onclick="moveCard('vc',1)">→</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Case 5: Unused Tickets DUMMY -->
+  <div class="case">
+    <div class="case-layout">
+      <div class="case-color c5">
+        <span class="case-num">05</span>
+        <div>
+          <p class="case-h"><span class="en">Unused Ticket & Credits Tracker</span><span class="id">Pelacak Tiket & Kredit Tidak Terpakai</span></p>
+          <p class="case-loc"><span class="en">Simulated · Practice Exercise</span><span class="id">Simulasi · Latihan</span></p>
+          <div class="case-badges"><span class="badge">Ticket Tracking</span><span class="badge">Expiry Management</span><span class="badge">Cost Recovery</span></div>
+        </div>
+      </div>
+      <div class="case-body">
+        <div class="case-text">
+          <div class="dummy-banner">⚠️ <span><span class="en">Simulated project — all airline names, credits, and traveller names are fictional.</span><span class="id">Proyek simulasi — semua nama maskapai, kredit, dan nama pelancong bersifat fiktif.</span></span></div>
+          <p class="case-text-label"><span class="en">What this demonstrates</span><span class="id">Yang didemonstrasikan</span></p>
+          <p class="case-text-body"><span class="en">Tracking log for unused flight credits across a fictional 20-person team — airline, credit value, expiry date, eligible traveller, and redemption status, sorted by expiry to prioritise action. Maps directly to "track unused tickets, credits and airline points usage."</span><span class="id">Log pelacakan untuk kredit penerbangan yang tidak terpakai di tim fiktif 20 orang, diurutkan berdasarkan kedaluwarsa untuk memprioritaskan tindakan.</span></p>
+        </div>
+        <div class="case-carousel">
+          <div class="card-img-track-wrap" id="wrap-ut"><div class="card-img-track" id="track-ut">
+            <div class="card-img-slide"><div class="card-img-placeholder"><span>✈️</span><p><span class="en">Add credits tracker screenshot (fictional data only)</span><span class="id">Tambahkan screenshot pelacak kredit (hanya data fiktif)</span></p></div></div>
+            <div class="card-img-slide"><div class="card-img-placeholder"><span>📅</span><p><span class="en">Add expiry-sorted priority view</span><span class="id">Tampilkan tampilan prioritas berdasarkan kedaluwarsa</span></p></div></div>
+          </div></div>
+          <div class="card-nav"><button class="card-nav-btn" onclick="moveCard('ut',-1)">←</button><div class="card-dots" id="dots-ut"></div><button class="card-nav-btn" onclick="moveCard('ut',1)">→</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CARBON FOOTPRINT TRACKER -->
+<section id="carbon">
+  <p class="tag"><span class="en">Carbon Awareness</span><span class="id">Kesadaran Karbon</span></p>
+  <h2 class="h2"><span class="en">Personal carbon footprint tracker</span><span class="id">Pelacak jejak karbon pribadi</span></h2>
+  <p class="h2-sub"><span class="en">Travel generates emissions. Some organisations monitor this directly. I track my own.</span><span class="id">Perjalanan menghasilkan emisi. Beberapa organisasi memantau ini secara langsung. Saya melacak milik saya sendiri.</span></p>
+  <div class="carbon-grid">
+    <div>
+      <p class="carbon-desc"><span class="en">Many companies — particularly those with sustainability mandates or net-zero commitments — now track travel emissions as part of their operational carbon accounting. This is one of the specific responsibilities listed in travel operations roles: "monitor trends, spend, emissions and compliance with company policy."</span><span class="id">Banyak perusahaan — khususnya yang memiliki mandat keberlanjutan atau komitmen net-zero — kini melacak emisi perjalanan sebagai bagian dari akuntansi karbon operasional mereka.</span></p>
+      <div class="carbon-why">
+        <p class="carbon-why-title"><span class="en">Why I track this</span><span class="id">Mengapa saya melacak ini</span></p>
+        <p class="carbon-why-text"><span class="en">I completed training in carbon accounting through Rise Social and biodiversity finance through UNDP. Beyond the certificates, I apply this knowledge practically: my personal travel carbon tracker uses the distance-based emission factor method, with greenhouse gas conversion factors from the UK Department of Energy Security and Net Zero (DESNZ). This means each trip is converted to CO₂ equivalent based on transport mode and distance, not rough estimates. For organisations that monitor travel emissions as part of their sustainability commitments, this is exactly the kind of operational thinking that sits behind responsible travel policy.</span><span class="id">Saya menyelesaikan pelatihan carbon accounting melalui Rise Social dan biodiversity finance melalui UNDP. Di luar sertifikat, saya menerapkan pengetahuan ini secara praktis: pelacak karbon perjalanan pribadi saya menggunakan metode berbasis jarak, dengan faktor konversi gas rumah kaca dari Departemen Keamanan Energi dan Net Zero (DESNZ) Inggris. Setiap perjalanan dikonversi ke CO₂ ekuivalen berdasarkan mode transportasi dan jarak.</span></p>
+      </div>
+    </div>
+    <div class="carbon-sample">
+      <div class="carbon-sample-head">
+        <p class="carbon-sample-title"><span class="en">Personal Travel Carbon Log</span><span class="id">Log Karbon Perjalanan Pribadi</span></p>
+        <p class="carbon-sample-sub"><span class="en">Personal Project · Real Data</span><span class="id">Proyek Pribadi · Data Nyata</span></p>
+      </div>
+      <div class="carbon-carousel">
+        <div class="carbon-img-wrap" id="wrap-carbon" onclick="openLb('','Personal Travel Carbon Log')">
+          <div class="carbon-img-placeholder"><span>🌿</span><p><span class="en">Add screenshot of your personal carbon tracking spreadsheet here — flight emissions by route, transport mode comparisons, offset notes</span><span class="id">Tambahkan screenshot spreadsheet pelacak karbon pribadi Anda di sini — emisi penerbangan per rute, perbandingan mode transportasi, catatan offset</span></p></div>
+        </div>
+      </div>
+      <div class="carbon-metrics">
+        <div class="cm-green"><p class="cm-green-n">CO₂</p><p class="cm-green-l"><span class="en">Emissions tracked per trip by mode</span><span class="id">Emisi dilacak per perjalanan berdasarkan mode</span></p></div>
+        <div class="cm-green"><p class="cm-green-n">🌍</p><p class="cm-green-l"><span class="en">Route-level comparison across transport options</span><span class="id">Perbandingan tingkat rute di berbagai opsi transportasi</span></p></div>
+        <div class="cm-green"><p class="cm-green-n">📊</p><p class="cm-green-l"><span class="en">Policy compliance readiness for corporate travel</span><span class="id">Kesiapan kepatuhan kebijakan untuk perjalanan korporat</span></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="sec">
+  <p class="tag"><span class="en">What these projects demonstrate</span><span class="id">Apa yang didemonstrasikan proyek ini</span></p>
+  <h2 class="h2"><span class="en">Skills that transfer to professional operations</span><span class="id">Keahlian yang bisa ditransfer ke operasional profesional</span></h2>
+  <div class="rule"></div>
+  <div class="skills-grid">
+    <div class="sk"><div class="sk-icon">📋</div><h3 class="sk-title"><span class="en">Scenario Planning</span><span class="id">Perencanaan Skenario</span></h3><p class="sk-desc"><span class="en">Comparing options before committing — the same thinking required when evaluating vendor quotes or planning event budgets.</span><span class="id">Membandingkan opsi sebelum memutuskan — pemikiran yang sama saat mengevaluasi penawaran vendor atau merencanakan anggaran acara.</span></p></div>
+    <div class="sk"><div class="sk-icon">💰</div><h3 class="sk-title"><span class="en">Budget Tracking & Reconciliation</span><span class="id">Pelacakan & Rekonsiliasi Anggaran</span></h3><p class="sk-desc"><span class="en">Actual spend tracked against plan at item level, across multiple currencies. Directly applicable to invoice checking and expense reporting.</span><span class="id">Pengeluaran aktual dilacak terhadap rencana di tingkat item, lintas mata uang. Langsung berlaku untuk pemeriksaan invoice.</span></p></div>
+    <div class="sk"><div class="sk-icon">🔍</div><h3 class="sk-title"><span class="en">Vendor Research</span><span class="id">Riset Vendor</span></h3><p class="sk-desc"><span class="en">Identifying, comparing, and documenting service providers with structured criteria and notes — vendor accountability thinking.</span><span class="id">Mengidentifikasi, membandingkan, dan mendokumentasikan penyedia layanan dengan kriteria terstruktur.</span></p></div>
+    <div class="sk"><div class="sk-icon">⏱️</div><h3 class="sk-title"><span class="en">Precise Scheduling</span><span class="id">Penjadwalan Presisi</span></h3><p class="sk-desc"><span class="en">30-minute time-blocked schedules accounting for transit, check-in windows, and connection buffers — precision required in event logistics.</span><span class="id">Jadwal blok 30 menit memperhitungkan transit, jendela check-in, dan buffer koneksi.</span></p></div>
+    <div class="sk"><div class="sk-icon">⚠️</div><h3 class="sk-title"><span class="en">Contingency Planning</span><span class="id">Perencanaan Kontingensi</span></h3><p class="sk-desc"><span class="en">Documenting seasonal risks, backup options, and alternative scenarios before problems occur — not reacting after.</span><span class="id">Mendokumentasikan risiko, opsi cadangan, dan skenario alternatif sebelum masalah terjadi.</span></p></div>
+    <div class="sk"><div class="sk-icon">🌿</div><h3 class="sk-title"><span class="en">Emissions Awareness</span><span class="id">Kesadaran Emisi</span></h3><p class="sk-desc"><span class="en">Trained in carbon accounting (Rise Social) and biodiversity finance (UNDP) — relevant to organisations that track travel emissions as part of sustainability commitments.</span><span class="id">Terlatih dalam carbon accounting (Rise Social) dan biodiversity finance (UNDP) — relevan untuk organisasi yang melacak emisi perjalanan.</span></p></div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section id="tools">
+  <p class="tag"><span class="en">Tools</span><span class="id">Alat</span></p>
+  <h2 class="h2"><span class="en">What I work with</span><span class="id">Yang saya gunakan</span></h2>
+  <div class="tools-wrap">
+    <span class="tool hi">Excel — pivot tables, vlookup, xlookup, index-match</span>
+    <span class="tool hi">Google Sheets</span>
+    <span class="tool hi">Multi-currency tracking</span>
+    <span class="tool">Scenario modelling</span>
+    <span class="tool">Vendor documentation</span>
+    <span class="tool">Time-zone scheduling</span>
+    <span class="tool">Carbon emission tracking</span>
+    <span class="tool">Remote async coordination</span>
+    <span class="tool">Google Workspace</span>
+    <span class="tool">Zoom · Microsoft Teams</span>
+  </div>
+</section>
+
+<section id="cert">
+  <p class="tag"><span class="en">Certification</span><span class="id">Sertifikasi</span></p>
+  <h2 class="h2" style="margin-bottom:24px;"><span class="en">Verified skill</span><span class="id">Keahlian terverifikasi</span></h2>
+  <div class="cert-card"><span class="cert-icon">📊</span><div><p class="cert-title">Microsoft Excel — XL-Test Certified</p><p class="cert-meta"><span class="en">Score: 98/100 · BelajarExcel.id</span><span class="id">Skor: 98/100 · BelajarExcel.id</span></p></div></div>
+</section>
+
+<section id="disc" style="background:var(--sand);padding:22px 72px;">
+  <div class="disc-inner"><span class="disc-ico">🔒</span><p class="disc-txt"><strong><span class="en">On confidentiality:</span><span class="id">Tentang kerahasiaan:</span></strong> <span class="en">Personal travel files contain no organisational or client data. Simulated projects use entirely fictional data and are clearly labelled. Professional work samples from previous employers are available on request but not published here.</span><span class="id">File perjalanan pribadi tidak mengandung data organisasi atau klien. Proyek simulasi menggunakan data fiktif sepenuhnya dan ditandai dengan jelas.</span></p></div>
+</section>
+
+<section id="cta" style="background:linear-gradient(145deg,#1E1610,#2B1E14);text-align:center;padding:80px 72px;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background-image:url('cta-bg.jpg');background-size:cover;background-position:center;opacity:0.12;z-index:0;"></div>
+  <div style="position:relative;z-index:1;">
+    <p class="tag" style="color:var(--gold);"><span class="en">Get In Touch</span><span class="id">Hubungi Saya</span></p>
+    <h2 class="h2" style="color:var(--white);margin-bottom:12px;font-family:var(--serif);"><span class="en">Open to new opportunities.<br/>Let's talk.</span><span class="id">Terbuka untuk peluang baru.<br/>Mari berdiskusi.</span></h2>
+    <p style="font-size:15px;color:rgba(250,243,235,.65);margin-bottom:40px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.8;"><span class="en">Particularly interested in travel operations, logistics coordination, and business services — remote or globally distributed.</span><span class="id">Tertarik pada operasional perjalanan, koordinasi logistik, dan layanan bisnis — jarak jauh atau terdistribusi secara global.</span></p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:28px;">
+      <a href="mailto:adiendasaman11@outlook.com" style="display:inline-flex;align-items:center;padding:14px 28px;background:var(--amber);color:var(--ink);border-radius:6px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:all .2s;"><span class="en">Send an Email</span><span class="id">Kirim Email</span></a>
+      <a href="https://www.linkedin.com/in/adienda-rizkya-yustika-saman/" target="_blank" style="display:inline-flex;align-items:center;padding:14px 28px;background:transparent;color:var(--gold);border:1.5px solid rgba(212,133,62,.5);border-radius:6px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:all .2s;">LinkedIn</a>
+    </div>
+    <div style="display:flex;gap:24px;justify-content:center;">
+      <a href="mailto:adiendasaman11@outlook.com" style="font-size:11.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);text-decoration:none;">adiendasaman11@outlook.com</a>
+      <a href="../" style="font-size:11.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);text-decoration:none;"><span class="en">All Portfolios</span><span class="id">Semua Portofolio</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="ft-name">Adienda Saman</span>
+  <a href="../" class="ft-back">← <span class="en">Back to Main</span><span class="id">Kembali ke Utama</span></a>
+  <span class="ft-note">© 2026 · Surabaya, Indonesia</span>
+</footer>
+
+<div id="lightbox" onclick="if(event.target===this)closeLb()">
+  <button id="lb-close" onclick="closeLb()">✕</button>
+  <img id="lb-img" src="" alt=""/>
+  <p id="lb-cap"></p>
+</div>
+
+<script>
+function setLang(l){document.body.setAttribute('data-lang',l);document.getElementById('ben').classList.toggle('on',l==='en');document.getElementById('bid').classList.toggle('on',l==='id');}
+const cardState={};
+function initCard(id){
+  const track=document.getElementById('track-'+id);
+  if(!track)return;
+  const slides=track.querySelectorAll('.card-img-slide');
+  const dotsWrap=document.getElementById('dots-'+id);
+  cardState[id]={idx:0,total:slides.length};
+  dotsWrap.innerHTML='';
+  slides.forEach((_,i)=>{const d=document.createElement('div');d.className='card-dot'+(i===0?' on':'');d.onclick=()=>goCard(id,i);dotsWrap.appendChild(d);});
+  const wrap=document.getElementById('wrap-'+id);
+  if(wrap)wrap.onclick=()=>{const cur=track.querySelectorAll('.card-img-slide')[cardState[id].idx];const img=cur.querySelector('img');if(img)openLb(img.src,img.alt);};
+  setInterval(()=>moveCard(id,1),5000+Math.random()*2000);
+}
+function moveCard(id,dir){const s=cardState[id];s.idx=(s.idx+dir+s.total)%s.total;updateCard(id);}
+function goCard(id,i){cardState[id].idx=i;updateCard(id);}
+function updateCard(id){const track=document.getElementById('track-'+id);const s=cardState[id];const w=track.parentElement.offsetWidth;track.style.transform=`translateX(-${s.idx*w}px)`;track.style.transition='transform .3s ease';document.getElementById('dots-'+id).querySelectorAll('.card-dot').forEach((d,i)=>d.classList.toggle('on',i===s.idx));}
+['bn','asean','dash','vc','ut'].forEach(initCard);
+function openLb(src,cap){document.getElementById('lb-img').src=src;document.getElementById('lb-cap').textContent=cap||'';document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
+function closeLb(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
+</script>
+</body>
+</html>
