@@ -203,26 +203,48 @@ footer{background:var(--warm);border-top:1px solid var(--sand);padding:20px 72px
 
 @media(max-width:960px){
   #hero{grid-template-columns:1fr;min-height:auto;}
-  .hero-inner{padding:64px 32px 36px;}
-  .hero-stats-panel{padding:20px 32px 52px;display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+  .hero-inner{padding:48px 28px;grid-template-columns:1fr;}
+  .hero-right{border-left:none;border-top:1px solid rgba(212,133,62,.15);padding-left:0;padding-top:20px;}
+  .hero-btns{flex-direction:column;gap:10px;}
+  .hero-btns a{width:100%;justify-content:center;}
+  #hero-kpis{grid-template-columns:repeat(3,1fr);}
   .case-layout{grid-template-columns:1fr;}
   .case-body{grid-template-columns:1fr;}
   .case-text{border-right:none;border-bottom:1px solid var(--sand);}
   .carbon-grid{grid-template-columns:1fr;}
   .skills-grid{grid-template-columns:1fr 1fr;}
-  .sec,#carbon,#tools,#cert,#disc,#cta{padding-left:32px;padding-right:32px;}
-  footer{padding:16px 32px;flex-direction:column;gap:8px;text-align:center;}
+  .tools-wrap{gap:8px;}
+  .sec,#carbon,#tools,#cert,#disc{padding-left:28px;padding-right:28px;}
+  #cta{padding-left:28px;padding-right:28px;}
+  footer{padding:16px 28px;flex-direction:column;gap:8px;text-align:center;}
   #nav{padding:0 20px;}
 }
 @media(max-width:560px){
-  .stats-row{grid-template-columns:1fr 1fr;}
+  .hero-inner{padding:40px 16px;gap:24px;}
+  .hero-h1{font-size:34px;}
+  .hero-p{font-size:13.5px;}
+  #hero-kpis{grid-template-columns:1fr 1fr;}
+  .hsp-box{padding:14px 10px;}
+  .hsp-n{font-size:26px;}
+  .hsp-l{font-size:10px;}
+  .hero-btns a{padding:13px 20px;font-size:11px;}
+  .case-layout{grid-template-columns:1fr;}
+  .case-body{grid-template-columns:1fr;}
+  .case-text{padding:18px 16px;}
+  .case-carousel{padding:12px;}
+  .case-metrics{grid-template-columns:1fr 1fr;}
+  .carbon-metrics{grid-template-columns:1fr 1fr;}
   .skills-grid{grid-template-columns:1fr;}
-  .hero-inner{padding:56px 20px;}
-  .sec{padding:40px 20px;}
-  #carbon,#tools,#cert,#disc,#cta{padding-left:20px;padding-right:20px;}
-  footer{padding:14px 20px;}
-  #nav{padding:0 16px;}
+  .sec{padding:40px 16px;}
+  #carbon,#tools,#cert,#disc,#cta{padding-left:16px;padding-right:16px;}
+  footer{padding:14px 16px;flex-direction:column;gap:6px;text-align:center;}
+  #nav{padding:0 14px;}
+  .nav-link{display:none;}
+  .nav-brand{font-size:15px;}
+  #hero-kpis{grid-template-columns:1fr 1fr;}
+  .dummy-banner span{font-size:11px;}
 }
+
 </style>
 </head>
 <body data-lang="en">
@@ -295,10 +317,16 @@ footer{background:var(--warm);border-top:1px solid var(--sand);padding:20px 72px
         <div class="case-carousel">
           <div class="card-img-track-wrap" id="wrap-bn"><div class="card-img-track" id="track-bn">
             <div class="card-img-slide">
-              <img src="img/Travel-Budgeting.jpg" alt="Travel-Budgeting.jpg"
+              <img src="img/BN-Travel-Planner.jpg" alt="BN Travel Planner"
                    style="width:100%;height:100%;object-fit:cover;display:block;"
                    onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-              <div class="card-img-placeholder" style="display:none;"><span>📷</span><p>Travel-Budgeting.jpg</p></div>
+              <div class="card-img-placeholder" style="display:none;"><span>📷</span><p>BN Travel Planner</p></div>
+            </div>
+            <div class="card-img-slide">
+              <img src="img/BN-Daily-Itinerary.jpg" alt="BN Daily Itinerary"
+                   style="width:100%;height:100%;object-fit:cover;display:block;"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+              <div class="card-img-placeholder" style="display:none;"><span>📷</span><p>BN Daily Itinerary</p></div>
             </div>
           </div></div>
           <div class="card-nav"><button class="card-nav-btn" onclick="moveCard('bn',-1)">←</button><div class="card-dots" id="dots-bn"></div><button class="card-nav-btn" onclick="moveCard('bn',1)">→</button></div>
@@ -332,16 +360,16 @@ footer{background:var(--warm);border-top:1px solid var(--sand);padding:20px 72px
         <div class="case-carousel">
           <div class="card-img-track-wrap" id="wrap-asean"><div class="card-img-track" id="track-asean">
             <div class="card-img-slide">
-              <img src="img/Travel-Itinerary.jpg" alt="Travel-Itinerary.jpg"
+              <img src="img/ASEAN-Travel-Budget.jpg" alt="ASEAN Travel Budget"
                    style="width:100%;height:100%;object-fit:cover;display:block;"
                    onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-              <div class="card-img-placeholder" style="display:none;"><span>📷</span><p>Travel-Itinerary.jpg</p></div>
+              <div class="card-img-placeholder" style="display:none;"><span>📷</span><p>ASEAN Travel Budget</p></div>
             </div>
             <div class="card-img-slide">
-              <img src="img/Travel-Scheduling.jpg" alt="Travel-Scheduling.jpg"
+              <img src="img/ASEAN-Daily-Itinerary.jpg" alt="ASEAN Daily Itinerary"
                    style="width:100%;height:100%;object-fit:cover;display:block;"
                    onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-              <div class="card-img-placeholder" style="display:none;"><span>📷</span><p>Travel-Scheduling.jpg</p></div>
+              <div class="card-img-placeholder" style="display:none;"><span>📷</span><p>ASEAN Daily Itinerary</p></div>
             </div>
           </div></div>
           <div class="card-nav"><button class="card-nav-btn" onclick="moveCard('asean',-1)">←</button><div class="card-dots" id="dots-asean"></div><button class="card-nav-btn" onclick="moveCard('asean',1)">→</button></div>
@@ -370,10 +398,13 @@ footer{background:var(--warm);border-top:1px solid var(--sand);padding:20px 72px
         <div class="case-carousel">
           <div class="card-img-track-wrap" id="wrap-dash"><div class="card-img-track" id="track-dash">
             <div class="card-img-slide">
-              <img src="img/Travel-Planner.jpg" alt="Travel-Planner.jpg"
-                   style="width:100%;height:100%;object-fit:cover;display:block;"
-                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-              <div class="card-img-placeholder" style="display:none;"><span>📷</span><p>Travel-Planner.jpg</p></div>
+              <div class="card-img-placeholder" style="background:#F5EDE0;border:2px dashed #C4A07A;cursor:default;">
+                <span>📂</span>
+                <p style="color:#8B6744;font-style:normal;font-size:12px;text-align:center;padding:0 16px;">
+                  <span class="en">Add your Spend Dashboard screenshot here when ready</span>
+                  <span class="id">Tambahkan screenshot Spend Dashboard Anda di sini</span>
+                </p>
+              </div>
             </div>
           </div></div>
           <div class="card-nav"><button class="card-nav-btn" onclick="moveCard('dash',-1)">←</button><div class="card-dots" id="dots-dash"></div><button class="card-nav-btn" onclick="moveCard('dash',1)">→</button></div>
@@ -401,8 +432,15 @@ footer{background:var(--warm);border-top:1px solid var(--sand);padding:20px 72px
         </div>
         <div class="case-carousel">
           <div class="card-img-track-wrap" id="wrap-vc"><div class="card-img-track" id="track-vc">
-            <div class="card-img-slide"><div class="card-img-placeholder"><span>📊</span><p><span class="en">Add vendor scorecard screenshot (fictional vendors only)</span><span class="id">Tambahkan screenshot scorecard vendor (hanya vendor fiktif)</span></p></div></div>
-            <div class="card-img-slide"><div class="card-img-placeholder"><span>⭐</span><p><span class="en">Add weighted scoring summary view</span><span class="id">Tambahkan tampilan ringkasan skor berbobot</span></p></div></div>
+            <div class="card-img-slide">
+              <div class="card-img-placeholder" style="background:#F5EDE0;border:2px dashed #C4A07A;cursor:default;">
+                <span>📂</span>
+                <p style="color:#8B6744;font-style:normal;font-size:12px;text-align:center;padding:0 16px;">
+                  <span class="en">Add your Vendor Scorecard screenshot here when ready</span>
+                  <span class="id">Tambahkan screenshot Vendor Scorecard Anda di sini</span>
+                </p>
+              </div>
+            </div>
           </div></div>
           <div class="card-nav"><button class="card-nav-btn" onclick="moveCard('vc',-1)">←</button><div class="card-dots" id="dots-vc"></div><button class="card-nav-btn" onclick="moveCard('vc',1)">→</button></div>
         </div>
@@ -429,8 +467,15 @@ footer{background:var(--warm);border-top:1px solid var(--sand);padding:20px 72px
         </div>
         <div class="case-carousel">
           <div class="card-img-track-wrap" id="wrap-ut"><div class="card-img-track" id="track-ut">
-            <div class="card-img-slide"><div class="card-img-placeholder"><span>✈️</span><p><span class="en">Add credits tracker screenshot (fictional data only)</span><span class="id">Tambahkan screenshot pelacak kredit (hanya data fiktif)</span></p></div></div>
-            <div class="card-img-slide"><div class="card-img-placeholder"><span>📅</span><p><span class="en">Add expiry-sorted priority view</span><span class="id">Tampilkan tampilan prioritas berdasarkan kedaluwarsa</span></p></div></div>
+            <div class="card-img-slide">
+              <div class="card-img-placeholder" style="background:#F5EDE0;border:2px dashed #C4A07A;cursor:default;">
+                <span>📂</span>
+                <p style="color:#8B6744;font-style:normal;font-size:12px;text-align:center;padding:0 16px;">
+                  <span class="en">Add your Unused Tickets Tracker screenshot here when ready</span>
+                  <span class="id">Tambahkan screenshot Unused Tickets Tracker Anda di sini</span>
+                </p>
+              </div>
+            </div>
           </div></div>
           <div class="card-nav"><button class="card-nav-btn" onclick="moveCard('ut',-1)">←</button><div class="card-dots" id="dots-ut"></div><button class="card-nav-btn" onclick="moveCard('ut',1)">→</button></div>
         </div>
@@ -458,8 +503,12 @@ footer{background:var(--warm);border-top:1px solid var(--sand);padding:20px 72px
         <p class="carbon-sample-sub"><span class="en">Personal Project · Real Data</span><span class="id">Proyek Pribadi · Data Nyata</span></p>
       </div>
       <div class="carbon-carousel">
-        <div class="carbon-img-wrap" id="wrap-carbon" onclick="openLb('','Personal Travel Carbon Log')">
-          <div class="carbon-img-placeholder"><span>🌿</span><p><span class="en">Add screenshot of your personal carbon tracking spreadsheet here — flight emissions by route, transport mode comparisons, offset notes</span><span class="id">Tambahkan screenshot spreadsheet pelacak karbon pribadi Anda di sini — emisi penerbangan per rute, perbandingan mode transportasi, catatan offset</span></p></div>
+        <div class="carbon-img-wrap" id="wrap-carbon" onclick="openLb('img/Carbon-Footprint-Tracker.jpg','Personal Travel Carbon Log — UK DESNZ Distance-Based Method')" style="cursor:zoom-in;">
+          <img src="img/Carbon-Footprint-Tracker.jpg" alt="Carbon Footprint Tracker"
+               style="width:100%;height:100%;object-fit:cover;display:block;"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="carbon-img-placeholder" style="display:none;"><span>🌿</span><p>Carbon Footprint Tracker</p></div>
+        </div>
         </div>
       </div>
       <div class="carbon-metrics">
