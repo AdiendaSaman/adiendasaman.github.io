@@ -64,14 +64,14 @@ span.en{display:inline!important;}span.id{display:none!important;}
 #rooms .label{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:10px;}
 #rooms .h2{font-family:var(--serif);font-size:clamp(28px,2.8vw,42px);font-weight:700;color:var(--white);margin-bottom:14px;white-space:nowrap;}
 #rooms .h2-sub{font-size:15px;color:var(--stone);margin-bottom:48px;max-width:560px;line-height:1.7;}
-.rooms-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.rooms-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;}
 .room-card{overflow:hidden;padding:40px 32px 36px;display:flex;flex-direction:column;justify-content:space-between;min-height:340px;cursor:pointer;transition:transform .3s;}
 .room-card:hover{transform:translateY(-4px);}
-.room-finance{background:#1A2332;}.room-ops{background:#1A2B1E;}.room-travel{background:#2B1E14;}
+.room-finance{background:#1A2332;}.room-ops{background:#1A2B1E;}.room-travel{background:#2B1E14;}.room-sales{background:#2B1620;}
 .room-inner{display:flex;flex-direction:column;height:100%;gap:16px;}
 .room-icon{font-size:26px;margin-bottom:2px;}
 .room-num{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-bottom:4px;}
-.room-finance .room-num{color:#7BA7D4;}.room-ops .room-num{color:#7FC49B;}.room-travel .room-num{color:#E8A87C;}
+.room-finance .room-num{color:#7BA7D4;}.room-ops .room-num{color:#7FC49B;}.room-travel .room-num{color:#E8A87C;}.room-sales .room-num{color:#D98FA6;}
 .room-title{font-family:var(--serif);font-size:26px;font-weight:700;color:var(--white);line-height:1.1;margin-bottom:8px;}
 .room-desc{font-size:13px;color:#A0A8B0;line-height:1.75;flex:1;}
 .room-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:14px;}
@@ -79,10 +79,12 @@ span.en{display:inline!important;}span.id{display:none!important;}
 .room-finance .room-tag{background:#243550;color:#7BA7D4;}
 .room-ops .room-tag{background:#243D28;color:#7FC49B;}
 .room-travel .room-tag{background:#3D281E;color:#E8A87C;}
+.room-sales .room-tag{background:#3D2029;color:#D98FA6;}
 .room-cta{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:9px 18px;border:1.5px solid;border-radius:4px;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;transition:all .2s;width:fit-content;}
 .room-finance .room-cta{border-color:#7BA7D4;color:#7BA7D4;}.room-finance .room-cta:hover{background:#7BA7D4;color:#1A2332;}
 .room-ops .room-cta{border-color:#7FC49B;color:#7FC49B;}.room-ops .room-cta:hover{background:#7FC49B;color:#1A2B1E;}
 .room-travel .room-cta{border-color:#E8A87C;color:#E8A87C;}.room-travel .room-cta:hover{background:#E8A87C;color:#2B1E14;}
+.room-sales .room-cta{border-color:#D98FA6;color:#D98FA6;}.room-sales .room-cta:hover{background:#D98FA6;color:#2B1620;}
 
 /* ABOUT */
 #about{background:var(--white);padding:80px;}
@@ -136,6 +138,7 @@ span.en{display:inline!important;}span.id{display:none!important;}
 .cat-finance-skill{background:#F2E8DC;border:1px solid #D4C9B8;}.cat-finance-skill .ts-cat-label{color:#8B6744;}.cat-finance-skill .ts-chip{background:#E8D5BC;color:#6B5040;border:1px solid #C4A07A;}
 .cat-ops-skill{background:#E8F0E8;border:1px solid #C0D4C0;}.cat-ops-skill .ts-cat-label{color:#3D7A55;}.cat-ops-skill .ts-chip{background:#D4E8D4;color:#2A5C40;border:1px solid #8FBFA0;}
 .cat-sector{background:#E4ECF5;border:1px solid #B8CCE4;}.cat-sector .ts-cat-label{color:#3B5FA0;}.cat-sector .ts-chip{background:#D0E0F0;color:#2B4370;border:1px solid #A8BFE0;}
+.cat-sales-tool,.cat-sales-skill{background:#F6E9ED;border:1px solid #DFC3CC;}.cat-sales-tool .ts-cat-label,.cat-sales-skill .ts-cat-label{color:#7A1E34;}.cat-sales-tool .ts-chip,.cat-sales-skill .ts-chip{background:#EDD6DD;color:#5C1526;border:1px solid #CFA4B2;}
 
 /* CERTIFICATES */
 #certs{background:var(--cream);padding:80px;}
@@ -271,7 +274,7 @@ footer{background:var(--cream);border-top:1px solid var(--beige);padding:22px 80
 
 <section id="rooms">
   <p class="label"><span class="en">Portfolios</span><span class="id">Portofolio</span></p>
-  <h2 class="h2"><span class="en">Three areas. One professional.</span><span class="id">Tiga bidang. Satu profesional.</span></h2>
+  <h2 class="h2"><span class="en">Four areas. One professional.</span><span class="id">Empat bidang. Satu profesional.</span></h2>
   <p class="h2-sub"><span class="en">Pick the portfolio most relevant to what you are looking for.</span><span class="id">Pilih portofolio yang paling relevan dengan yang Anda cari.</span></p>
   <div class="rooms-grid">
     <div class="room-card room-finance" onclick="location.href='finance/'">
@@ -302,6 +305,16 @@ footer{background:var(--cream);border-top:1px solid var(--beige);padding:22px 80
         </div>
         <div><div class="room-tags"><span class="room-tag">Multi-Currency Budget</span><span class="room-tag">Itinerary Design</span><span class="room-tag">Vendor Research</span><span class="room-tag">Carbon Tracking</span></div>
           <a href="travel/" class="room-cta"><span class="en">View Travel Portfolio</span><span class="id">Lihat Portofolio Perjalanan</span></a></div>
+      </div>
+    </div>
+    <div class="room-card room-sales" onclick="location.href='sales/'">
+      <div class="room-inner">
+        <div><div class="room-icon">📱</div><p class="room-num"><span class="en">Portfolio 04</span><span class="id">Portofolio 04</span></p>
+          <h3 class="room-title"><span class="en">Sales, Support and Marketing</span><span class="id">Penjualan, Layanan dan Pemasaran</span></h3>
+          <p class="room-desc"><span class="en">Multi-channel sales and customer support, online installment documentation, and social media marketing — growing an Indonesian customer base in Taiwan from zero to four cities for a Taiwan-based retail and electronics distribution company.</span><span class="id">Penjualan dan layanan pelanggan multi-kanal, dokumentasi cicilan online, dan pemasaran media sosial — membangun basis pelanggan Indonesia di Taiwan dari nol hingga empat kota untuk perusahaan ritel dan distributor elektronik berbasis di Taiwan.</span></p>
+        </div>
+        <div><div class="room-tags"><span class="room-tag">Multi-Channel Sales</span><span class="room-tag">Customer Support</span><span class="room-tag">Content Marketing</span><span class="room-tag">Contract Documentation</span></div>
+          <a href="sales/" class="room-cta"><span class="en">View Sales Portfolio</span><span class="id">Lihat Portofolio Penjualan</span></a></div>
       </div>
     </div>
   </div>
@@ -412,6 +425,7 @@ footer{background:var(--cream);border-top:1px solid var(--beige);padding:22px 80
         <div class="ts-cat cat-accounting"><p class="ts-cat-label"><span class="en">Accounting and Finance</span><span class="id">Akuntansi dan Keuangan</span></p><div class="ts-chips"><span class="ts-chip">Accurate</span><span class="ts-chip">QuickBooks</span><span class="ts-chip">Xero</span></div></div>
         <div class="ts-cat cat-productivity"><p class="ts-cat-label"><span class="en">Productivity and Collaboration</span><span class="id">Produktivitas dan Kolaborasi</span></p><div class="ts-chips"><span class="ts-chip">Microsoft Office</span><span class="ts-chip">Google Workspace</span><span class="ts-chip">Trello</span><span class="ts-chip">Notion</span><span class="ts-chip">Zoom</span><span class="ts-chip">Microsoft Teams</span></div></div>
         <div class="ts-cat cat-excel"><p class="ts-cat-label">Excel</p><div class="ts-chips"><span class="ts-chip">Pivot Tables</span><span class="ts-chip">VLOOKUP and XLOOKUP</span><span class="ts-chip">Index-Match</span><span class="ts-chip">Scenario Modelling</span></div></div>
+        <div class="ts-cat cat-sales-tool"><p class="ts-cat-label"><span class="en">Sales and Marketing</span><span class="id">Penjualan dan Pemasaran</span></p><div class="ts-chips"><span class="ts-chip">Pancake</span><span class="ts-chip">Canva</span><span class="ts-chip">CapCut</span><span class="ts-chip">Facebook</span><span class="ts-chip">TikTok</span><span class="ts-chip">WhatsApp</span><span class="ts-chip">Line</span><span class="ts-chip">Messenger</span></div></div>
       </div>
     </div>
     <div>
@@ -419,6 +433,7 @@ footer{background:var(--cream);border-top:1px solid var(--beige);padding:22px 80
       <div class="ts-cats">
         <div class="ts-cat cat-finance-skill"><p class="ts-cat-label"><span class="en">Finance and Compliance</span><span class="id">Keuangan dan Kepatuhan</span></p><div class="ts-chips"><span class="ts-chip">Grant Management</span><span class="ts-chip">Donor Compliance</span><span class="ts-chip">Budget Forecasting</span><span class="ts-chip">Project Finance Management</span><span class="ts-chip">Variance Analysis</span><span class="ts-chip">VAT Recording</span></div></div>
         <div class="ts-cat cat-ops-skill"><p class="ts-cat-label"><span class="en">Operations and Coordination</span><span class="id">Operasional dan Koordinasi</span></p><div class="ts-chips"><span class="ts-chip">Activity Planning</span><span class="ts-chip">Procurement Review</span><span class="ts-chip">Remote Coordination</span><span class="ts-chip">Cross-cultural Communication</span><span class="ts-chip">Team Leadership</span></div></div>
+        <div class="ts-cat cat-sales-skill"><p class="ts-cat-label"><span class="en">Sales, Support and Marketing</span><span class="id">Penjualan, Layanan dan Pemasaran</span></p><div class="ts-chips"><span class="ts-chip">Lead Handling and Closing</span><span class="ts-chip">Installment Scheme Advising</span><span class="ts-chip">Contract and E-Sign Processing</span><span class="ts-chip">Multi-Channel Customer Support</span><span class="ts-chip">Social Media Content</span><span class="ts-chip">Community Growth</span></div></div>
         <div class="ts-cat cat-sector"><p class="ts-cat-label"><span class="en">Sector Knowledge</span><span class="id">Pengetahuan Sektor</span></p><div class="ts-chips"><span class="ts-chip">Carbon Accounting</span><span class="ts-chip">Biodiversity Finance</span><span class="ts-chip">NGO Financial Reporting</span></div></div>
       </div>
     </div>
@@ -496,7 +511,7 @@ footer{background:var(--cream);border-top:1px solid var(--beige);padding:22px 80
 
 <footer>
   <span class="ft-name">Adienda Saman</span>
-  <div class="ft-links"><a href="finance/" class="ft-link">Finance</a><a href="ops/" class="ft-link">Operations</a><a href="travel/" class="ft-link">Travel</a></div>
+  <div class="ft-links"><a href="finance/" class="ft-link">Finance</a><a href="ops/" class="ft-link">Operations</a><a href="travel/" class="ft-link">Travel</a><a href="sales/" class="ft-link">Sales</a></div>
   <span class="ft-note">© 2026 · Surabaya, Indonesia</span>
 </footer>
 
