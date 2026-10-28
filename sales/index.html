@@ -67,7 +67,8 @@
   /* proof */
   .proof-row{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
   .proof-item{border:1px solid #D8CDC7;border-radius:var(--radius);overflow:hidden;background:var(--grey-bg);}
-  .proof-item img{width:100%;height:auto;}
+  .proof-media{aspect-ratio:2/1;background:#111;}
+  .proof-media img{width:100%;height:100%;object-fit:contain;cursor:zoom-in;}
   .proof-caption{padding:14px 16px;font-size:13px;color:var(--grey);border-top:1px solid var(--line);}
   .proof-caption strong{color:var(--text);font-weight:600;}
 
@@ -95,26 +96,29 @@
   .tool-line .cat{min-width:120px;color:var(--burgundy-soft);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.06em;}
   .tool-line .items{color:var(--text);}
 
-  /* editing samples */
-  .sample-group{margin-top:36px;}
-  .sample-group:first-of-type{margin-top:8px;}
-  .group-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--line);}
-  .group-head h3{font-size:19px;color:var(--burgundy-deep);}
-  .group-head .gsub{font-size:13px;color:var(--grey);}
-  .sample-grid{display:grid;gap:18px;align-items:start;}
-  .sample-grid.cols-2{grid-template-columns:repeat(2,1fr);}
-  .sample{border:1px solid #D8CDC7;border-radius:var(--radius);overflow:hidden;background:var(--white);box-shadow:0 1px 3px rgba(74,15,32,.05);display:flex;flex-direction:column;}
-  .sample-media{position:relative;background:var(--grey-bg);}
-  .sample-media img{width:100%;height:auto;cursor:zoom-in;}
-  .sample-media video{width:100%;height:auto;display:block;background:#000;}
+  /* editing samples — slider */
+  .slider{position:relative;margin-top:28px;}
+  .track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;padding:2px 2px 6px;}
+  .track::-webkit-scrollbar{display:none;}
+  .sample{flex:0 0 calc((100% - 36px)/3);scroll-snap-align:start;border:1px solid #D8CDC7;border-radius:var(--radius);overflow:hidden;background:var(--white);box-shadow:0 1px 3px rgba(74,15,32,.05);display:flex;flex-direction:column;}
+  .sample-media{position:relative;aspect-ratio:1/1;overflow:hidden;background:var(--grey-bg);}
+  .sample-media.is-video{background:#000;}
+  .sample-media img,.sample-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;}
+  .sample-media img{cursor:zoom-in;}
   .sample-badge{position:absolute;top:10px;left:10px;z-index:2;background:rgba(74,15,32,.88);color:#fff;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:20px;pointer-events:none;}
-  .sample-cap{padding:14px 16px;border-top:1px solid var(--line);}
-  .sample-cap .st{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px;line-height:1.35;}
+  .sample-cap{padding:14px 16px 16px;border-top:1px solid var(--line);min-height:112px;}
+  .sample-cap .brand{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--burgundy-soft);margin-bottom:4px;}
+  .sample-cap .st{font-size:14px;font-weight:600;color:var(--text);margin-bottom:3px;line-height:1.35;}
   .sample-cap .sm{font-size:12.5px;color:var(--grey);line-height:1.5;}
   .sample-cap .sm a{color:var(--burgundy);text-decoration:underline;text-underline-offset:2px;}
-  .video-row{display:grid;grid-template-columns:300px 1fr;gap:28px;align-items:start;}
-  .video-row .vnote{color:var(--grey);font-size:14.5px;max-width:48ch;}
-  .video-row .vnote p + p{margin-top:12px;}
+  .slider-ctrl{display:flex;align-items:center;justify-content:space-between;margin-top:16px;}
+  .dots{display:flex;gap:8px;}
+  .dot{width:8px;height:8px;border-radius:50%;background:#D8CDC7;border:none;cursor:pointer;padding:0;}
+  .dot.active{background:var(--burgundy);}
+  .arrows{display:flex;gap:10px;}
+  .arrow{width:40px;height:40px;border-radius:50%;border:1px solid var(--burgundy);background:var(--white);color:var(--burgundy);font-size:18px;cursor:pointer;line-height:1;transition:background .2s,color .2s;}
+  .arrow:hover:not(:disabled){background:var(--burgundy);color:var(--white);}
+  .arrow:disabled{opacity:.3;cursor:default;}
   .lightbox{position:fixed;inset:0;background:rgba(20,6,10,.9);display:none;align-items:center;justify-content:center;z-index:100;padding:24px;cursor:zoom-out;}
   .lightbox.open{display:flex;}
   .lightbox img{max-width:100%;max-height:100%;border-radius:6px;}
@@ -158,9 +162,7 @@
     .card-row{grid-template-columns:1fr;}
     .roles-wrap{grid-template-columns:1fr;}
     .cert-grid{grid-template-columns:1fr;}
-    .sample-grid.cols-2{grid-template-columns:1fr;}
-    .video-row{grid-template-columns:1fr;}
-    .video-row .sample{max-width:320px;}
+    .sample{flex:0 0 82%;}
     .tool-line{flex-direction:column;gap:4px;}
   }
 </style>
@@ -208,11 +210,11 @@
     <h2 class="title"><span class="en">The numbers, straight from the pages</span><span class="id">Angkanya, langsung dari halamannya</span></h2>
     <div class="proof-row">
       <div class="proof-item">
-        <img src="Tiktok.png" alt="StarMobile Cicilan HP TWKR TikTok profile — 44.3K followers, 909.2K likes">
+        <div class="proof-media"><img src="Tiktok.png" alt="StarMobile Cicilan HP TWKR TikTok profile — 44.3K followers, 909.2K likes"></div>
         <div class="proof-caption"><strong>TikTok</strong> — <span class="en">StarMobile Cicilan HP TWKR</span><span class="id">StarMobile Cicilan HP TWKR</span></div>
       </div>
       <div class="proof-item">
-        <img src="Pages.png" alt="Star Mobile Indonesia Facebook page — 7.2K followers">
+        <div class="proof-media"><img src="Pages.png" alt="Star Mobile Indonesia Facebook page — 7.2K followers"></div>
         <div class="proof-caption"><strong>Facebook</strong> — <span class="en">Star Mobile Indonesia</span><span class="id">Star Mobile Indonesia</span></div>
       </div>
     </div>
@@ -251,19 +253,19 @@
 <!-- ============================================================
      EDITING SAMPLES — EDIT THIS SECTION YOURSELF
      ------------------------------------------------------------
-     Files live in:  the same folder as this index.html (sales/)
+     Files live in the same folder as this index.html (sales/).
+     Every slide is the same size automatically (square frame); images
+     are fitted inside the frame, never cropped.
 
-     ADD AN IMAGE:  copy one <div class="sample">...</div> block into a
-       sample-grid, then change: the img src, the badge, the title (.st)
-       and the meta line (.sm).
-     ADD A VIDEO:   copy the <div class="sample"> inside .video-row and
-       change the <video src>, poster and captions. Keep videos under
-       ~10 MB (GitHub rejects files over 100 MB; big clips load slowly).
-     ADD A NEW GROUP: copy a whole <div class="sample-group">...</div>.
-     REMOVE:        delete the whole block of the sample you don't want.
+     ADD A SLIDE:  copy one <div class="sample">...</div> block inside
+       <div class="track">, change the img src, the .brand line, the
+       title (.st) and the meta line (.sm). The dots update themselves.
+     ADD A VIDEO:  copy SLIDE 5, keep class "is-video", change the
+       <video src> and poster. Keep videos under ~10 MB.
+     REMOVE:       delete that slide's whole <div class="sample"> block.
 
-     INSTAGRAM LATER: when your sample Instagram account exists, paste
-       this just under the </p class="intro"> line in the heading area:
+     INSTAGRAM LATER: when your sample account exists, paste this
+       right under the intro paragraph:
        <a class="btn secondary" href="https://instagram.com/YOURHANDLE"
           target="_blank" rel="noopener">See more on Instagram</a>
      ============================================================ -->
@@ -271,91 +273,79 @@
   <div class="inner">
     <div class="kicker"><span class="en">Editing Samples</span><span class="id">Contoh Hasil Editing</span></div>
     <h2 class="title" style="margin-bottom:8px;"><span class="en">Content I made, not just posted</span><span class="id">Konten yang saya buat, bukan sekadar diposting</span></h2>
-    <p class="intro" style="margin-bottom:8px;"><span class="en">Promotional graphics and video edited in Canva across three different brands and audiences. Click any image to zoom in.</span><span class="id">Grafis promosi dan video yang diedit di Canva untuk tiga brand dan audiens berbeda. Klik gambar mana pun untuk memperbesar.</span></p>
+    <p class="intro" style="margin-bottom:8px;"><span class="en">Promotional graphics and video edited in Canva for three different brands and audiences. Swipe or use the arrows; click an image to zoom in.</span><span class="id">Grafis promosi dan video yang diedit di Canva untuk tiga brand dan audiens berbeda. Geser atau pakai panah; klik gambar untuk memperbesar.</span></p>
 
-    <!-- ===== GROUP: STAR MOBILE ===== -->
-    <div class="sample-group">
-      <div class="group-head">
-        <h3>Star Mobile</h3>
-        <span class="gsub"><span class="en">Electronics retail · posted on the Facebook page</span><span class="id">Ritel elektronik · diposting di halaman Facebook</span></span>
-      </div>
-      <div class="sample-grid cols-2">
+    <div class="slider" id="slider">
+      <div class="track" id="track">
+        <!-- ===== SLIDE 1 ===== -->
         <div class="sample">
           <div class="sample-media">
             <span class="sample-badge">Canva</span>
             <img src="starmobile-iphone-installment.jpg" alt="Star Mobile iPhone 15 Pro Max 0% down payment installment promo graphic" loading="lazy"/>
           </div>
           <div class="sample-cap">
+            <p class="brand">Star Mobile · Electronics retail</p>
             <p class="st"><span class="en">Installment promo — iPhone 15 Pro Max</span><span class="id">Promo cicilan — iPhone 15 Pro Max</span></p>
-            <p class="sm"><span class="en">Edited in Canva · posted on the Star Mobile Facebook page</span><span class="id">Diedit di Canva · diposting di Facebook Star Mobile</span></p>
+            <p class="sm"><span class="en">Edited in Canva · posted on the Facebook page</span><span class="id">Diedit di Canva · diposting di halaman Facebook</span></p>
           </div>
         </div>
+        <!-- ===== SLIDE 2 ===== -->
         <div class="sample">
           <div class="sample-media">
             <span class="sample-badge">Canva</span>
             <img src="starmobile-july-discount.jpg" alt="Star Mobile July price discount banner" loading="lazy"/>
           </div>
           <div class="sample-cap">
+            <p class="brand">Star Mobile · Electronics retail</p>
             <p class="st"><span class="en">Monthly price banner — July discount</span><span class="id">Banner harga bulanan — diskon Juli</span></p>
-            <p class="sm"><span class="en">Edited in Canva · posted on the Star Mobile Facebook page</span><span class="id">Diedit di Canva · diposting di Facebook Star Mobile</span></p>
+            <p class="sm"><span class="en">Edited in Canva · posted on the Facebook page</span><span class="id">Diedit di Canva · diposting di halaman Facebook</span></p>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- ===== GROUP: HAIJRA.ID ===== -->
-    <div class="sample-group">
-      <div class="group-head">
-        <h3>Haijra.id</h3>
-        <span class="gsub"><span class="en">Hijab retail · posted on Facebook and Instagram</span><span class="id">Ritel hijab · diposting di Facebook dan Instagram</span></span>
-      </div>
-      <div class="sample-grid cols-2">
+        <!-- ===== SLIDE 3 ===== -->
         <div class="sample">
           <div class="sample-media">
             <span class="sample-badge">Canva</span>
-            <img src="haijra-hawwa.jpg" alt="Haijra Hawwa daily hijab product catalogue graphic with colour options and prices" loading="lazy"/>
+            <img src="haijra-hawwa.jpg" alt="Haijra Hawwa daily hijab catalogue graphic with colour options and prices" loading="lazy"/>
           </div>
           <div class="sample-cap">
+            <p class="brand">Haijra.id · Hijab retail</p>
             <p class="st"><span class="en">Product catalogue — Hawwa daily hijab</span><span class="id">Katalog produk — hijab harian Hawwa</span></p>
             <p class="sm"><span class="en">Edited in Canva · posted on Facebook and Instagram</span><span class="id">Diedit di Canva · diposting di Facebook dan Instagram</span></p>
           </div>
         </div>
+        <!-- ===== SLIDE 4 ===== -->
         <div class="sample">
           <div class="sample-media">
             <span class="sample-badge">Canva</span>
             <img src="haijra-maryam-khimar.jpg" alt="Haijra Maryam Khimar product graphic with five colour options" loading="lazy"/>
           </div>
           <div class="sample-cap">
+            <p class="brand">Haijra.id · Hijab retail</p>
             <p class="st"><span class="en">Product launch — Maryam Khimar</span><span class="id">Peluncuran produk — Maryam Khimar</span></p>
             <p class="sm"><span class="en">Edited in Canva · posted on Facebook and Instagram</span><span class="id">Diedit di Canva · diposting di Facebook dan Instagram</span></p>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- ===== GROUP: PERSONAL CONTENT ===== -->
-    <div class="sample-group">
-      <div class="group-head">
-        <h3><span class="en">Personal content</span><span class="id">Konten pribadi</span></h3>
-        <span class="gsub"><span class="en">Scholarship storytelling on TikTok</span><span class="id">Cerita beasiswa di TikTok</span></span>
-      </div>
-      <div class="video-row">
+        <!-- ===== SLIDE 5 (video) ===== -->
         <div class="sample">
-          <div class="sample-media">
+          <div class="sample-media is-video">
             <span class="sample-badge">Canva · Video</span>
             <video src="sample-video-scholarship.mp4" poster="sample-video-scholarship-poster.jpg" controls playsinline preload="metadata"></video>
           </div>
           <div class="sample-cap">
+            <p class="brand"><span class="en">Personal content</span><span class="id">Konten pribadi</span></p>
             <p class="st"><span class="en">Scholarship story video</span><span class="id">Video cerita beasiswa</span></p>
             <p class="sm"><span class="en">Edited in Canva · posted on TikTok <a href="https://www.tiktok.com/@ceritadienda" target="_blank" rel="noopener">@ceritadienda</a></span><span class="id">Diedit di Canva · diposting di TikTok <a href="https://www.tiktok.com/@ceritadienda" target="_blank" rel="noopener">@ceritadienda</a></span></p>
           </div>
         </div>
-        <div class="vnote">
-          <p><span class="en">Not every sample here is a sales piece. This one is my own scholarship content, built the same way as client work: a clear hook, readable text on screen, and a format that fits how people actually watch on TikTok.</span><span class="id">Tidak semua sample di sini adalah materi penjualan. Ini adalah konten beasiswa saya sendiri, dibuat dengan cara yang sama seperti pekerjaan klien: hook yang jelas, teks di layar yang mudah dibaca, dan format yang sesuai dengan cara orang menonton di TikTok.</span></p>
+      </div>
+      <div class="slider-ctrl">
+        <div class="dots" id="dots"></div>
+        <div class="arrows">
+          <button class="arrow" id="prev" aria-label="Previous">&larr;</button>
+          <button class="arrow" id="next" aria-label="Next">&rarr;</button>
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -471,11 +461,38 @@
 <div class="lightbox" id="lightbox"><img id="lightbox-img" alt=""/></div>
 
 <script>
-  document.querySelectorAll('.sample-media img').forEach(function(img){
+  (function(){
+    var track=document.getElementById('track'), dots=document.getElementById('dots');
+    var prev=document.getElementById('prev'), next=document.getElementById('next');
+    var slides=track.querySelectorAll('.sample');
+    slides.forEach(function(_,i){
+      var d=document.createElement('button'); d.className='dot'; d.setAttribute('aria-label','Slide '+(i+1));
+      d.onclick=function(){ go(i); }; dots.appendChild(d);
+    });
+    function step(){ return slides[0].getBoundingClientRect().width + 18; }
+    function idx(){ return Math.round(track.scrollLeft/step()); }
+    function go(i){ track.scrollTo({left:i*step(),behavior:'smooth'}); }
+    function update(){
+      var i=idx(), max=track.scrollWidth-track.clientWidth-2;
+      dots.querySelectorAll('.dot').forEach(function(d,k){ d.classList.toggle('active',k===i); });
+      prev.disabled = track.scrollLeft<=2;
+      next.disabled = track.scrollLeft>=max;
+      track.querySelectorAll('video').forEach(function(v){
+        var r=v.getBoundingClientRect(), t=track.getBoundingClientRect();
+        if(r.right<t.left+20||r.left>t.right-20) v.pause();
+      });
+    }
+    prev.onclick=function(){ go(Math.max(0,idx()-1)); };
+    next.onclick=function(){ go(Math.min(slides.length-1,idx()+1)); };
+    track.addEventListener('scroll',function(){ window.requestAnimationFrame(update); });
+    window.addEventListener('resize',update);
+    update();
+  })();
+
+  document.querySelectorAll('.sample-media img, .proof-media img').forEach(function(img){
     img.addEventListener('click', function(){
-      var lb=document.getElementById('lightbox');
       document.getElementById('lightbox-img').src=img.src;
-      lb.classList.add('open');
+      document.getElementById('lightbox').classList.add('open');
     });
   });
   document.getElementById('lightbox').addEventListener('click', function(){this.classList.remove('open');});
